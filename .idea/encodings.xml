@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="Encoding">
+    <file url="file://$PROJECT_DIR$/app/controllers/LoginController.php" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/app/controllers/PublicController.php" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/app/models/User.php" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/app/views/admin/notification.blade.php" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/app/views/email.blade.php" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/app/views/public/index.blade.php" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/app/views/public/kontakt.blade.php" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/app/views/public/login.blade.php" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/app/views/publicLayout/footer.blade.php" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/app/views/publicLayout/header.blade.php" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/public/js/emailAjax.js" charset="UTF-8" />
+  </component>
+</project>

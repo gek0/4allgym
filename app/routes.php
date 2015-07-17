@@ -11,7 +11,36 @@
 |
 */
 
-Route::get('/', function()
-{
-	return View::make('hello');
+/**
+ * admin area
+ */
+Route::group(['before' => 'auth'], function() {
+	Route::get('admin', function(){
+		return Redirect::to('admin/pocetna');
+	});
+	Route::get('admin/pocetna', ['as' => 'admin', 'uses' => 'AdminController@showHome']);
+
+
 });
+
+/**
+ * logout from admin area
+ */
+Route::get('logout', function(){
+	Auth::logout();
+	return Redirect::to('/');
+});
+
+Route::post('login', ['as' => 'loginPost', 'uses' => 'LoginController@checkLogin']);
+Route::get('login', ['as' => 'login', 'uses' => 'LoginController@showLogin']);
+
+/**
+ * public area
+ */
+
+Route::post('kontakt', ['as' => 'kontaktPost', 'uses' => 'PublicController@sendMail']);
+Route::get('kontakt', ['as' => 'kontakt', 'uses' => 'PublicController@showContact']);
+
+Route::get('o-nama', ['as' => 'o-nama', 'uses' => 'PublicController@showAboutUs']);
+
+Route::get('/', ['as' => 'home', 'uses' => 'PublicController@showHome']);

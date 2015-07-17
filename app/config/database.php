@@ -56,7 +56,7 @@ return array(
 			'driver'    => 'mysql',
 			'host'      => 'localhost',
 			'database'  => '4allgym',
-			'username'  => '4allgym',
+			'username'  => 'root',
 			'password'  => 'zezancija',
 			'charset'   => 'utf8',
 			'collation' => 'utf8_unicode_ci',

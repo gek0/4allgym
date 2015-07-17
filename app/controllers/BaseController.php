@@ -3,6 +3,14 @@
 class BaseController extends Controller {
 
 	/**
+	 * CSRF validation on requests
+	 */
+	public function __construct()
+	{
+		$this->beforeFilter('crfs', ['on' => ['post', 'put', 'patch', 'delete']]);
+	}
+
+	/**
 	 * Setup the layout used by the controller.
 	 *
 	 * @return void
