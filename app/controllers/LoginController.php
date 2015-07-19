@@ -47,7 +47,7 @@ class LoginController extends BaseController{
             $token = Input::get('_token');
             $user_data = ['username' => e($input_data['username']),
                             'password' => $input_data['password'],
-                            'rememberMe' => e($input_data['rememberMe'])
+                            'rememberMe' => $input_data['rememberMe']
                         ];
 
             //check if csrf token is valid

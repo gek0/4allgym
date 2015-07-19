@@ -81,6 +81,22 @@ App::down(function()
 
 /*
 |--------------------------------------------------------------------------
+| Route Not Found Handler
+|--------------------------------------------------------------------------
+|
+| If no controller for intended route is found, send 404 error code
+|
+*/
+
+App::missing(function($exception)
+{
+    if(getenv('APP_ENV') == 'production') {
+        return Response::view('error', ['exception' => 'Stranica nije pronađena.', 'page_title' => '404'], 404);
+    }
+});
+
+/*
+|--------------------------------------------------------------------------
 | Require The Filters File
 |--------------------------------------------------------------------------
 |

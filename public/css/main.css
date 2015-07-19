@@ -136,6 +136,8 @@ a:visited, a:hover, a:active{
 .danger-notif{ color: #ff0000; }
 .info-notif{ color: #5BC0DE; }
 
+.light{ color: #fff; }
+
 img.thumbnail {
     margin: 0 auto 10px;
     border: none;
@@ -831,7 +833,7 @@ hr{
    480-less    - phone landscape & smaller
 --------------------------------------------*/
 @media all and (max-width: 1068px) {
-    .main-content{
+    #main{
         width: 100%;
     }
 }

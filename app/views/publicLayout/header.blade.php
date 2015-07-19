@@ -51,12 +51,12 @@
                 <h2 class="block-title">Navigacija</h2>
                 <ul>
                     {{ HTML::smartRoute_link('/', 'Početna', '<i class="fa fa-home"></i>') }}
-                    {{ HTML::smartRoute_link('o-nama', 'O nama', '<i class="fa fa-info"></i>') }}
                     {{ HTML::smartRoute_link('portal', 'Portal', '<i class="fa fa-newspaper-o"></i>') }}
                     {{ HTML::smartRoute_link('shop', 'Ponuda', '<i class="fa fa-shopping-cart"></i>') }}
                     {{ HTML::smartRoute_link('galerija', 'Galerija', '<i class="fa fa-picture-o"></i>') }}
                     {{ HTML::smartRoute_link('caffe-bar', 'Caffe bar', '<i class="fa fa-coffee"></i>') }}
                     {{ HTML::smartRoute_link('cage-football', 'Cage football', '<i class="fa fa-futbol-o"></i>') }}
+                    {{ HTML::smartRoute_link('o-nama', 'O nama', '<i class="fa fa-info"></i>') }}
                     {{ HTML::smartRoute_link('kontakt', 'Kontakt', '<i class="fa fa-envelope"></i>') }}
                 </ul>
                 <a class="close-btn" id="nav-close-btn" href="#top"><i class="fa fa-close" title="Sakrij navigaciju"></i></a>

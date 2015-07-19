@@ -20,6 +20,11 @@ Route::group(['before' => 'auth'], function() {
 	});
 	Route::get('admin/pocetna', ['as' => 'admin', 'uses' => 'AdminController@showHome']);
 
+	//user settings
+	Route::get('admin/korisnicke-postavke', ['as' => 'admin-user-settings', 'uses' => 'AdminController@showUserSettings']);
+	Route::post('admin/korisnicke-postavke/spremi', ['as' => 'admin-user-settings-update', 'uses' => 'AdminController@updateUserSettings']);
+	Route::post('admin/korisnicke-postavke/dodaj', ['as' => 'admin-user-settings-add', 'uses' => 'AdminController@addNewUser']);
+
 
 });
 
