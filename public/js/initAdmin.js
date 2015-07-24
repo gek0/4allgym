@@ -34,6 +34,24 @@ jQuery(document).ready(function(){
                 }, scroll_top_duration
             );
         });
+
+    /**
+     *   add lazy loading to images out of screen viewport
+     */
+    $(function() {
+        $("img.lazy").lazyload({
+            effect : "fadeIn"
+        });
+    });
+
+    /**
+    *   BBcode editor
+    */
+    var lg = {
+        lang: "hr",
+        buttons: "bold,italic,underline,strike,sup,sub,|,justifyleft,justifycenter,justifyright,|,table,bullist,numlist,fontcolor,|,link,video,removeFormat"
+    }
+    $("#codeEditor").wysibb(lg);
 });
 
 /**
@@ -72,3 +90,71 @@ function catchLaravelNotification(errorHtmlSourceID, notificationType) {
         restoreNotification();
     }, numSeconds * 1000);
 }
+
+/**
+ *  image lightbox gallery
+ */
+(function($){
+    $(document).ready(function(){
+        //activity indicator
+        var activityIndicatorOn = function(){
+                $( '<div id="imagelightbox-loading"><div></div></div>' ).appendTo('body');
+            },
+            activityIndicatorOff = function(){
+                $('#imagelightbox-loading').remove();
+            },
+        //overlay
+            overlayOn = function(){
+                $( '<div id="imagelightbox-overlay"></div>' ).appendTo('body');
+            },
+            overlayOff = function(){
+                $('#imagelightbox-overlay').remove();
+            },
+        //close button
+            closeButtonOn = function(instance){
+                $( '<button type="button" id="imagelightbox-close" title="Zatvori"></button>' ).appendTo('body').on('click touchend', function(){ $(this).remove(); instance.quitImageLightbox(); return false; });
+            },
+            closeButtonOff = function(){
+                $('#imagelightbox-close').remove();
+            },
+        //arrows
+            arrowsOn = function(instance, selector){
+                var $arrows = $('<button type="button" class="imagelightbox-arrow imagelightbox-arrow-left" title="Prethodna"></button><button type="button" class="imagelightbox-arrow imagelightbox-arrow-right" title="Sljedeća"></button>');
+                $arrows.appendTo('body');
+
+                $arrows.on('click touchend', function(e){
+                    e.preventDefault();
+
+                    var $this = $(this),
+                        $target = $(selector + '[href="' + $('#imagelightbox').attr('src') + '"]'),
+                        index = $target.index(selector);
+
+                    if ($this.hasClass('imagelightbox-arrow-left')) {
+                        index = index - 1;
+                        if (!$(selector).eq(index).length)
+                            index = $(selector).length;
+                    } else {
+                        index = index + 1;
+                        if (!$(selector).eq(index).length)
+                            index = 0;
+                    }
+
+                    instance.switchImageLightbox(index);
+                    return false;
+                });
+            },
+            arrowsOff = function(){
+                $('.imagelightbox-arrow').remove();
+            };
+
+        //run gallery
+        var selector = 'a[data-imagelightbox="gallery-images"]';
+        var instance = $(selector).imageLightbox({
+            onStart:        function() { overlayOn(); closeButtonOn(instance); arrowsOn(instance, selector); },
+            onEnd:          function() { overlayOff(); closeButtonOff(); arrowsOff(); activityIndicatorOff(); },
+            onLoadStart:    function() { activityIndicatorOn(); },
+            onLoadEnd:      function() { activityIndicatorOff(); $('.imagelightbox-arrow').css('display', 'block'); }
+        });
+
+    });
+})(this.jQuery);

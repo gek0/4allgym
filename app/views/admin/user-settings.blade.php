@@ -83,4 +83,7 @@
 
 </section> <!-- end #main -->
 
+{{-- include session notification output --}}
+@include('admin.notification')
+
 @include('adminLayout.footer')

@@ -9,11 +9,13 @@
 
 <a href="#0" class="cd-top"></a>
     <!-- scripts -->
-    {{ HTML::script('js/bootstrap.min.js', ['charset' => 'utf-8']) }}
+    {{ HTML::script('wysibb/jquery.wysibb.min.js', ['charset' => 'utf-8']) }}
+    {{ HTML::script('wysibb/lang/hr.js', ['charset' => 'utf-8']) }}
+    {{ HTML::script('js/classie.min.js', ['charset' => 'utf-8']) }}
     {{ HTML::script('js/jquery.lazyload.min.js', ['charset' => 'utf-8']) }}
     {{ HTML::script('js/bootstrap-select.min.js', ['charset' => 'utf-8']) }}
-    {{ HTML::script('js/classie.min.js', ['charset' => 'utf-8']) }}
-    {{ HTML::script('js/AjaxJS.js', ['charset' => 'utf-8']) }}
+    {{ HTML::script('js/imagelightbox.min.js', ['charset' => 'utf-8']) }}
+    {{ HTML::script('js/ajaxJS.js', ['charset' => 'utf-8']) }}
     {{ HTML::script('js/initAdmin.js', ['charset' => 'utf-8']) }}
 </body>
 </html>

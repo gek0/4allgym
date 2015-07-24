@@ -18,7 +18,9 @@
 
     <!-- scripts -->
     {{ HTML::script('js/jquery.min.js', ['charset' => 'utf-8']) }}
+    {{ HTML::script('js/bootstrap.min.js', ['charset' => 'utf-8']) }}
     {{ HTML::script('js/modernizr.js', ['charset' => 'utf-8']) }}
+    {{ HTML::script('js/fileinput.min.js', array('charset' => 'utf-8')) }}
     <!--[if lt IE 9]>
     {{ HTML::script('js/html5shiv.min.js', array('charset' => 'utf-8')) }}
     {{ HTML::script('js/respond.min.js', array('charset' => 'utf-8')) }}
@@ -26,7 +28,8 @@
 
     <!-- stylesheets -->
     {{ HTML::style('css/bootstrap.min.css') }}
-    {{ HTML::style('css/main.css') }}
+    {{ HTML::style('css/main.css') }}    
+    {{ HTML::style('wysibb/theme/default/wbbtheme.css') }}
 </head>
 <body>
 <!-- notifications -->
@@ -53,6 +56,8 @@
                 <p class="text-center light">Pozdrav <strong><span id="nav-user-content">{{ Auth::user()->username }}</span></strong></p>
                 <ul>
                     {{ HTML::smartRoute_link('admin/pocetna', 'Početna', '<i class="fa fa-home"></i>') }}
+                    {{ HTML::smartRoute_link('admin/caffe-bar', 'Caffe bar', '<i class="fa fa-coffee"></i>') }}
+                    {{ HTML::smartRoute_link('admin/cage-football', 'Cage football', '<i class="fa fa-futbol-o"></i>') }}
                     {{ HTML::smartRoute_link('admin/korisnicke-postavke', 'Korisničke postavke', '<i class="fa fa-user"></i>') }}
                     {{ HTML::smartRoute_link('logout', 'Odjava', '<i class="fa fa-sign-out"></i>') }}
                 </ul>

@@ -25,7 +25,17 @@ Route::group(['before' => 'auth'], function() {
 	Route::post('admin/korisnicke-postavke/spremi', ['as' => 'admin-user-settings-update', 'uses' => 'AdminController@updateUserSettings']);
 	Route::post('admin/korisnicke-postavke/dodaj', ['as' => 'admin-user-settings-add', 'uses' => 'AdminController@addNewUser']);
 
+	//cage football
+	Route::get('admin/cage-football', ['as' => 'admin-cage-football', 'uses' => 'AdminController@showCageFootball']);
+	Route::post('admin/cage-football', ['as' => 'admin-cage-football-post', 'uses' => 'AdminController@updateCageFootball']);
 
+	//caffe bar
+	Route::get('admin/caffe-bar', ['as' => 'admin-caffe-bar', 'uses' => 'AdminController@showCaffeBar']);
+	Route::post('admin/caffe-bar', ['as' => 'admin-caffe-bar-post', 'uses' => 'AdminController@updateCaffeBar']);
+
+	//cage football and caffe bar image gallery
+	Route::post('admin/gallery-image-delete', ['as' => 'admin-gallery-image-delete', 'uses' => 'AdminController@deleteGalleryImage']);
+	Route::post('admin/gallery-image-set-primary', ['as' => 'admin-gallery-image-set-primary', 'uses' => 'AdminController@setPrimaryGalleryImage']);
 });
 
 /**
