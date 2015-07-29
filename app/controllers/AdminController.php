@@ -28,7 +28,12 @@ class AdminController extends BaseController{
         //get current user data
         $user_data = User::findOrFail(Auth::user()->id);
 
-        return View::make('admin.user-settings')->with(['user_data' => $user_data]);
+        //get all users data
+        $all_users_data = User::orderBy('username', 'ASC')->get();
+
+        return View::make('admin.user-settings')->with(['user_data' => $user_data,
+                                                        'all_users_data' => $all_users_data
+                                                        ]);
     }
 
     /**
@@ -127,6 +132,62 @@ class AdminController extends BaseController{
                     $user->save();
 
                     return Response::json(['status' => 'success']);
+                }
+            }
+        }
+        else{
+            return Response::json(['status' => 'error',
+                                    'errors' => 'Data not sent with Ajax.'
+                                ]);
+        }
+    }
+
+    /**
+     * delete user
+     * @return mixed
+     */
+    public function deleteUser()
+    {
+        if(Request::ajax()){
+
+            //get category ID and token
+            $user_id = e(Input::get('userData'));
+            $token = Request::ajax() ? Request::header('X-CSRF-Token') : Input::get('_token');
+
+            //check if csrf token is valid
+            if(Session::token() != $token){
+                return Response::json(['status' => 'error',
+                                        'errors' => 'CSRF token is not valid.'
+                                    ]);
+            }
+            else{
+                $user = User::findOrFail($user_id);
+
+                //delete user if exists and return JSON response
+                if($user){
+                    //check if user is admin
+                    if($user->id == 1){
+                        return Response::json(['status' => 'error',
+                            'errors' => 'Administrator se ne može obrisati.'
+                        ]);
+                    }
+
+                    //try to delete user
+                    try{
+                        $user->delete();
+
+                        return Response::json(['status' => 'success']);
+                    }
+                    catch(Exception $e){
+                        return Response::json(['status' => 'error',
+                                                'errors' => 'Brisanje korisnika nije uspjelo.'
+                                            ]);
+                    }
+                }
+                else{
+                    return Response::json(['status' => 'error',
+                                            'errors' => 'Korisnik ne postoji.'
+                                        ]);
                 }
             }
         }

@@ -111,7 +111,6 @@ jQuery(document).ready(function(){
         return false;
     });
 
-
     /**
      * add new user
      */
@@ -214,6 +213,102 @@ jQuery(document).ready(function(){
                         restoreNotification();
                     }, numSeconds * 1000);
                 }
+            }
+        });
+
+        return false;
+    });
+
+    /**
+     * delete existing user
+     */
+    $('.btn-delete-sure').click(function(){
+        var userID = parseInt($(this).parent().parent().attr('id'));    //get ID of category to delete
+        var token = $('meta[name="_token"]').attr('content');
+        var dataURL = $('#user-list-table').attr('data-link-delete');
+        var outputMsg = $('#outputMsg');
+        var errorMsg = "";
+        var successMsg = "<h3>Korisnik je uspješno obrisan.</h3>";
+
+        function restoreNotification(){
+            outputMsg.fadeOut(1000, function(){
+                outputMsg.find('h3').remove();
+                $('#notificationTimer').empty();
+
+                setTimeout(function () {
+                    outputMsg.attr('class', 'notificationOutput');
+                }, 1000);
+            });
+        }
+
+        /*
+         *   delete product confirm
+         */
+        bootbox.confirm("Stvarno želiš obrisati ovog korisnika?", function(result) {
+            if(result == true){
+                $.ajax({
+                    type: 'post',
+                    url: dataURL,
+                    dataType: 'json',
+                    headers: { 'X-CSRF-Token' : token },
+                    data: { userData: userID },
+                    success: function(data){
+
+                        //check status of validation and query
+                        if(data.status === 'success'){
+                            //hide table row when deleted from DB
+                            $('#user-list-table').find('tr#' + userID).fadeOut(1000);
+
+                            outputMsg.append(successMsg).addClass('successNotif').slideDown();
+
+                            //timer
+                            var numSeconds = 3;
+                            var timer = 3;
+                            function countDown(){
+                                numSeconds--;
+                                if(numSeconds == 0){
+                                    clearInterval(timer);
+                                }
+                                $('#notificationTimer').html(numSeconds);
+                            }
+                            timer = setInterval(countDown, 1000);
+
+                            //hide notification if user clicked
+                            $('#notifTool').click(function(){
+                                restoreNotification();
+                            });
+
+                            setTimeout(function(){
+                                restoreNotification();
+                            }, numSeconds * 1000);
+                        }
+                        else{
+                            errorMsg = "<h3>" + data.errors + "</h3>";
+                            outputMsg.append(errorMsg).addClass('warningNotif').slideDown();
+
+                            //timer
+                            var numSeconds = 5;
+                            var timer = 5;
+                            function countDown(){
+                                numSeconds--;
+                                if(numSeconds == 0){
+                                    clearInterval(timer);
+                                }
+                                $('#notificationTimer').html(numSeconds);
+                            }
+                            timer = setInterval(countDown, 1000);
+
+                            //hide notification if user clicked
+                            $('#notifTool').click(function(){
+                                restoreNotification();
+                            });
+
+                            setTimeout(function(){
+                                restoreNotification();
+                            }, numSeconds * 1000);
+                        }
+                    }
+                });
             }
         });
 

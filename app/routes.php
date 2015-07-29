@@ -24,6 +24,7 @@ Route::group(['before' => 'auth'], function() {
 	Route::get('admin/korisnicke-postavke', ['as' => 'admin-user-settings', 'uses' => 'AdminController@showUserSettings']);
 	Route::post('admin/korisnicke-postavke/spremi', ['as' => 'admin-user-settings-update', 'uses' => 'AdminController@updateUserSettings']);
 	Route::post('admin/korisnicke-postavke/dodaj', ['as' => 'admin-user-settings-add', 'uses' => 'AdminController@addNewUser']);
+	Route::post('admin/korisnicke-postavke/obrisi', ['as' => 'admin-user-settings-delete', 'uses' => 'AdminController@deleteUser']);
 
 	//cage football
 	Route::get('admin/cage-football', ['as' => 'admin-cage-football', 'uses' => 'AdminController@showCageFootball']);

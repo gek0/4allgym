@@ -729,6 +729,33 @@ hr{
     display: flex;
 }
 
+.table-simple-tools tr:first-child td:first-child {
+    width: 40%;
+}
+
+.table-bordered,.table,
+.table-bordered > tbody > tr > td,
+.table-bordered > tbody > tr > th,
+.table-bordered > tfoot > tr > td,
+.table-bordered > tfoot > tr > th,
+.table-bordered > thead > tr > td,
+.table-bordered > thead > tr > th{
+    border: 1px solid rgba(251, 209, 97, 0.75);
+}
+
+.table-hover > tbody > tr:hover{
+    background: rgba(251, 209, 97, .55);
+}
+
+.table > thead > tr{
+    background: rgba(251, 209, 97, .75);
+}
+
+.table-striped > tbody > tr:nth-child(odd) > td,
+.table-striped > tbody > tr:nth-child(odd) > th {
+    background: rgba(251, 209, 97, .75);
+}
+
 .small-marg { margin: .5em 0; }
 
 .medium-marg { margin: 1em 0; }
@@ -890,6 +917,17 @@ hr{
 .imagelightbox-arrow {
     -webkit-animation: fade-in .25s linear;
     animation: fade-in .25s linear;
+}
+
+/**
+*   bootbox
+*/
+.modal-content{
+    background-color: #2F2F2F;
+}
+
+.modal-footer{
+    border-top: 1px dashed rgba(251, 209, 97, .75);
 }
 
 /**

@@ -81,6 +81,40 @@
     	</div> <!-- end new-user form -->
     </div> <!-- end row -->
 
+	<div class="space"></div>
+	<div class="row">
+		<div class="col-md-12 text-center">
+			<h4 class="section-header text-center">Lista aktivnih korisnika</h4>
+
+			<section class="section form-section">
+				<table class="table table-bordered table-hover text-center table-simple-tools" id="user-list-table" data-link-delete="{{ URL::route('admin-user-settings-delete') }}">
+					<thead>
+					<tr>
+						<td>Korisničko ime</td>
+						<td>E-mail korisnika</td>
+						<td>Zadnja izmjena</td>
+						<td>Brisanje korisnika</td>
+					</tr>
+					</thead>
+					<tbody>
+					@foreach($all_users_data as $user)
+						<tr id="{{ $user['id'] }}" role="user-content-row">
+							<td>{{ $user['username'] }}</td>
+							<td>{{ $user['email'] }}</td>
+							<td>
+								<time datetime="{{ date('d.m.Y. H:i', strtotime($user['updated_at'])) }}">{{ date('d.m.Y. \u H:i:s', strtotime($user['updated_at'])) }}</time>
+							</td>
+							<td>
+								<button class="btn btn-submit-delete btn-delete-sure"><i class="fa fa-trash"></i></button>
+							</td>
+						</tr>
+					@endforeach
+					</tbody>
+				</table>
+			</section> <!-- end form-section -->
+		</div> <!-- end user-list -->
+	</div> <!-- end row -->
+
 </section> <!-- end #main -->
 
 {{-- include session notification output --}}
