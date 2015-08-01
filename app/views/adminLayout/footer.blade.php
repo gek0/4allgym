@@ -14,6 +14,7 @@
     {{ HTML::script('js/classie.min.js', ['charset' => 'utf-8']) }}
     {{ HTML::script('js/jquery.lazyload.min.js', ['charset' => 'utf-8']) }}
     {{ HTML::script('js/bootstrap-select.min.js', ['charset' => 'utf-8']) }}
+    {{ HTML::script('js/bootstrap-tagsinput.min.js', ['charset' => 'utf-8']) }}
     {{ HTML::script('js/imagelightbox.min.js', ['charset' => 'utf-8']) }}
     {{ HTML::script('js/bootbox.js', ['charset' => 'utf-8']) }}
     {{ HTML::script('js/ajaxJS.js', ['charset' => 'utf-8']) }}

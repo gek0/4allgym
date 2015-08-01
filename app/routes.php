@@ -37,6 +37,18 @@ Route::group(['before' => 'auth'], function() {
 	//cage football and caffe bar image gallery
 	Route::post('admin/gallery-image-delete', ['as' => 'admin-gallery-image-delete', 'uses' => 'AdminController@deleteGalleryImage']);
 	Route::post('admin/gallery-image-set-primary', ['as' => 'admin-gallery-image-set-primary', 'uses' => 'AdminController@setPrimaryGalleryImage']);
+
+	//news portal
+	Route::get('admin/portal', ['as' => 'admin-portal', 'uses' => 'AdminController@showNewsPortal']);
+	Route::post('admin/portal/gallery-image-delete', ['as' => 'admin-portal-gallery-image-delete', 'uses' => 'AdminController@deleteNewsGalleryImage']);
+	Route::get('admin/portal/dodaj', ['as' => 'admin-portal-add', 'uses' => 'AdminController@showNewNewsForm']);
+	Route::post('admin/portal/dodaj', ['as' => 'admin-portal-addPost', 'uses' => 'AdminController@addNewNews']);
+	Route::get('admin/portal/pregled/{slug}', ['as' => 'admin-portal-show', 'uses' => 'AdminController@showNews'])->where(['slug' => '[\w\-šđčćžŠĐČĆŽ]+']);
+	Route::get('admin/portal/izmjena/{slug}', ['as' => 'admin-portal-edit', 'uses' => 'AdminController@showNewsEditForm'])->where(['slug' => '[\w\-šđčćžŠĐČĆŽ]+']);
+	Route::post('admin/portal/izmjena/{slug}', ['as' => 'admin-portal-editPost', 'uses' => 'AdminController@updateNews'])->where(['slug' => '[\w\-šđčćžŠĐČĆŽ]+']);
+	Route::get('admin/portal/brisanje/{slug}', ['as' => 'admin-portal-delete', 'uses' => 'AdminController@deleteNews'])->where(['slug' => '[\w\-šđčćžŠĐČĆŽ]+']);
+
+
 });
 
 /**

@@ -1,7 +1,7 @@
 @include('adminLayout.header')
 
 <section class="section main-content" id="main">
-    <h2 class="section-header">Cage Football</h2>
+    <h2 class="section-header">Administracija <i class="fa fa-angle-right"></i> Cage Football</h2>
 
     	<section class="section form-section">
 		    {{ Form::open(['url' => 'admin/cage-football', 'role' => 'form', 'id' => 'cage-football', 'files' => true]) }}		    
@@ -58,7 +58,7 @@
 @include('admin.notification')
 
 <script>
-    $("#cage_fooball_images").fileinput({
+    $("#cage_football_images").fileinput({
         showUpload: false,
         layoutTemplates: {
             main1: "{preview}\n" +

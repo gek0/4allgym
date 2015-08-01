@@ -52,6 +52,31 @@ jQuery(document).ready(function(){
         buttons: "bold,italic,underline,strike,sup,sub,|,justifyleft,justifycenter,justifyright,|,table,bullist,numlist,fontcolor,|,link,video,removeFormat"
     }
     $("#codeEditor").wysibb(lg);
+
+    /**
+     *   toogle tags-collection container view
+     */
+    $("#toogle-tags-collection").click(function(event){
+        event.preventDefault();
+
+        //update element value
+        if($(this).children().attr('class') == 'fa fa-chevron-down'){
+            $(this).children().attr('class', 'fa fa-chevron-up');
+        }
+        else if($(this).children().attr('class') == 'fa fa-chevron-up'){
+            $(this).children().attr('class', 'fa fa-chevron-down');
+        }
+
+        $("#tags-collection").toggle(250);
+    });
+
+    /**
+     *   add selected tag to tags input
+     */
+    $("#tags-collection ul li").click(function() {
+        $('#news_tags').tagsinput('add', $(this).text());
+        $(this).fadeOut(300, function(){ $(this).remove(); }); //remove used tag from DOM
+    });
 });
 
 /**

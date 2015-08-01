@@ -1,10 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="Encoding">
+    <file url="file://$PROJECT_DIR$/app/controllers/AdminController.php" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/app/controllers/LoginController.php" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/app/controllers/PublicController.php" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/app/functions.php" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/app/models/News.php" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/app/models/NewsImage.php" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/app/models/Tag.php" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/app/models/User.php" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/app/routes.php" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/app/validators.php" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/app/views/admin/notification.blade.php" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/app/views/admin/portal/index.blade.php" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/app/views/admin/portal/izmjena.blade.php" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/app/views/admin/portal/nova.blade.php" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/app/views/admin/portal/pregled.blade.php" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/app/views/email.blade.php" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/app/views/error.blade.php" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/app/views/public/index.blade.php" charset="UTF-8" />
@@ -12,6 +23,7 @@
     <file url="file://$PROJECT_DIR$/app/views/public/login.blade.php" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/app/views/publicLayout/footer.blade.php" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/app/views/publicLayout/header.blade.php" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/composer.json" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/public/js/emailAjax.js" charset="UTF-8" />
   </component>
 </project>

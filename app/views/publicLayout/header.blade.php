@@ -9,11 +9,24 @@
     <title>4AllGym :: {{ $page_title or '' }}</title>
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="keywords" content="4allGym, kondicijska, pripreme, centar, gym, teretana, mma, zagreb">
+    <meta name="description" content="4allGym - kondicijski centar">
+    <meta name="author" content="Matija Buriša">
     <meta property="og:title" content="4allGym" />
     <meta property="og:type" content="website" />
     <meta property="og:url" content="{{ Request::url('/') }}" />
     <meta property="og:site_name" content="4allgym.hr" />
     <meta property="og:description" content="4allGym - kondicijski centar" />
+
+    <!-- favicons and apple icon -->
+    <!--[if IE]><link rel="shortcut icon" href="{{ asset('favicon.ico') }}"><![endif]-->
+    <link rel="icon" href="{{ asset('favicon.png') }}">
+    <link rel="apple-touch-icon" href="{{ asset('touch-icon-iphone.png') }}">
+    <link rel="apple-touch-icon" sizes="76x76" href="{{ asset('touch-icon-ipad.png') }}">
+    <link rel="apple-touch-icon" sizes="120x120" href="{{ asset('touch-icon-iphone-retina.png') }}">
+    <link rel="apple-touch-icon" sizes="152x152" href="{{ asset('touch-icon-ipad-retina.png') }}">
+    <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('touch-icon-iphone-6-plus.png') }}">
+    <link rel="canonical" href="{{ Request::url() }}" />
 
     <!-- scripts -->
     {{ HTML::script('js/jquery.min.js', ['charset' => 'utf-8']) }}

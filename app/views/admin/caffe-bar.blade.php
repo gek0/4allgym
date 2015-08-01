@@ -1,7 +1,7 @@
 @include('adminLayout.header')
 
 <section class="section main-content" id="main">
-    <h2 class="section-header">Caffe Bar</h2>
+    <h2 class="section-header">Administracija <i class="fa fa-angle-right"></i> Caffe Bar</h2>
 
     	<section class="section form-section">
 		    {{ Form::open(['url' => 'admin/caffe-bar', 'role' => 'form', 'id' => 'caffe-bar', 'files' => true]) }}		    
