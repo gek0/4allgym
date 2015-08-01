@@ -3,7 +3,10 @@
   <component name="Encoding">
     <file url="file://$PROJECT_DIR$/app/controllers/AdminController.php" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/app/controllers/LoginController.php" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/app/controllers/NewsController.php" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/app/controllers/PagesController.php" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/app/controllers/PublicController.php" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/app/controllers/UserController.php" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/app/functions.php" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/app/models/News.php" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/app/models/NewsImage.php" charset="UTF-8" />

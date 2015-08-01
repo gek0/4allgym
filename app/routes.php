@@ -21,32 +21,28 @@ Route::group(['before' => 'auth'], function() {
 	Route::get('admin/pocetna', ['as' => 'admin', 'uses' => 'AdminController@showHome']);
 
 	//user settings
-	Route::get('admin/korisnicke-postavke', ['as' => 'admin-user-settings', 'uses' => 'AdminController@showUserSettings']);
-	Route::post('admin/korisnicke-postavke/spremi', ['as' => 'admin-user-settings-update', 'uses' => 'AdminController@updateUserSettings']);
-	Route::post('admin/korisnicke-postavke/dodaj', ['as' => 'admin-user-settings-add', 'uses' => 'AdminController@addNewUser']);
-	Route::post('admin/korisnicke-postavke/obrisi', ['as' => 'admin-user-settings-delete', 'uses' => 'AdminController@deleteUser']);
+	Route::get('admin/korisnicke-postavke', ['as' => 'admin-user-settings', 'uses' => 'UserController@showUserSettings']);
+	Route::post('admin/korisnicke-postavke/spremi', ['as' => 'admin-user-settings-update', 'uses' => 'UserController@updateUserSettings']);
+	Route::post('admin/korisnicke-postavke/dodaj', ['as' => 'admin-user-settings-add', 'uses' => 'UserController@addNewUser']);
+	Route::post('admin/korisnicke-postavke/obrisi', ['as' => 'admin-user-settings-delete', 'uses' => 'UserController@deleteUser']);
 
-	//cage football
-	Route::get('admin/cage-football', ['as' => 'admin-cage-football', 'uses' => 'AdminController@showCageFootball']);
-	Route::post('admin/cage-football', ['as' => 'admin-cage-football-post', 'uses' => 'AdminController@updateCageFootball']);
-
-	//caffe bar
-	Route::get('admin/caffe-bar', ['as' => 'admin-caffe-bar', 'uses' => 'AdminController@showCaffeBar']);
-	Route::post('admin/caffe-bar', ['as' => 'admin-caffe-bar-post', 'uses' => 'AdminController@updateCaffeBar']);
-
-	//cage football and caffe bar image gallery
-	Route::post('admin/gallery-image-delete', ['as' => 'admin-gallery-image-delete', 'uses' => 'AdminController@deleteGalleryImage']);
-	Route::post('admin/gallery-image-set-primary', ['as' => 'admin-gallery-image-set-primary', 'uses' => 'AdminController@setPrimaryGalleryImage']);
+	//cage football - caffe bar - image gallery
+	Route::get('admin/cage-football', ['as' => 'admin-cage-football', 'uses' => 'PagesController@showCageFootballAdmin']);
+	Route::post('admin/cage-football', ['as' => 'admin-cage-football-post', 'uses' => 'PagesController@updateCageFootball']);
+	Route::get('admin/caffe-bar', ['as' => 'admin-caffe-bar', 'uses' => 'PagesController@showCaffeBarAdmin']);
+	Route::post('admin/caffe-bar', ['as' => 'admin-caffe-bar-post', 'uses' => 'PagesController@updateCaffeBar']);
+	Route::post('admin/gallery-image-delete', ['as' => 'admin-gallery-image-delete', 'uses' => 'PagesController@deleteGalleryImage']);
+	Route::post('admin/gallery-image-set-primary', ['as' => 'admin-gallery-image-set-primary', 'uses' => 'PagesController@setPrimaryGalleryImage']);
 
 	//news portal
-	Route::get('admin/portal', ['as' => 'admin-portal', 'uses' => 'AdminController@showNewsPortal']);
-	Route::post('admin/portal/gallery-image-delete', ['as' => 'admin-portal-gallery-image-delete', 'uses' => 'AdminController@deleteNewsGalleryImage']);
-	Route::get('admin/portal/dodaj', ['as' => 'admin-portal-add', 'uses' => 'AdminController@showNewNewsForm']);
-	Route::post('admin/portal/dodaj', ['as' => 'admin-portal-addPost', 'uses' => 'AdminController@addNewNews']);
-	Route::get('admin/portal/pregled/{slug}', ['as' => 'admin-portal-show', 'uses' => 'AdminController@showNews'])->where(['slug' => '[\w\-šđčćžŠĐČĆŽ]+']);
-	Route::get('admin/portal/izmjena/{slug}', ['as' => 'admin-portal-edit', 'uses' => 'AdminController@showNewsEditForm'])->where(['slug' => '[\w\-šđčćžŠĐČĆŽ]+']);
-	Route::post('admin/portal/izmjena/{slug}', ['as' => 'admin-portal-editPost', 'uses' => 'AdminController@updateNews'])->where(['slug' => '[\w\-šđčćžŠĐČĆŽ]+']);
-	Route::get('admin/portal/brisanje/{slug}', ['as' => 'admin-portal-delete', 'uses' => 'AdminController@deleteNews'])->where(['slug' => '[\w\-šđčćžŠĐČĆŽ]+']);
+	Route::get('admin/portal', ['as' => 'admin-portal', 'uses' => 'NewsController@showNewsPortalAdmin']);
+	Route::post('admin/portal/gallery-image-delete', ['as' => 'admin-portal-gallery-image-delete', 'uses' => 'NewsController@deleteNewsGalleryImage']);
+	Route::get('admin/portal/dodaj', ['as' => 'admin-portal-add', 'uses' => 'NewsController@showNewNewsForm']);
+	Route::post('admin/portal/dodaj', ['as' => 'admin-portal-addPost', 'uses' => 'NewsController@addNewNews']);
+	Route::get('admin/portal/pregled/{slug}', ['as' => 'admin-portal-show', 'uses' => 'NewsController@showNews'])->where(['slug' => '[\w\-šđčćžŠĐČĆŽ]+']);
+	Route::get('admin/portal/izmjena/{slug}', ['as' => 'admin-portal-edit', 'uses' => 'NewsController@showNewsEditForm'])->where(['slug' => '[\w\-šđčćžŠĐČĆŽ]+']);
+	Route::post('admin/portal/izmjena/{slug}', ['as' => 'admin-portal-editPost', 'uses' => 'NewsController@updateNews'])->where(['slug' => '[\w\-šđčćžŠĐČĆŽ]+']);
+	Route::get('admin/portal/brisanje/{slug}', ['as' => 'admin-portal-delete', 'uses' => 'NewsController@deleteNews'])->where(['slug' => '[\w\-šđčćžŠĐČĆŽ]+']);
 
 
 });
