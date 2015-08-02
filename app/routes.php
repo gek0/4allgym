@@ -44,6 +44,8 @@ Route::group(['before' => 'auth'], function() {
 	Route::post('admin/portal/izmjena/{slug}', ['as' => 'admin-portal-editPost', 'uses' => 'NewsController@updateNews'])->where(['slug' => '[\w\-šđčćžŠĐČĆŽ]+']);
 	Route::get('admin/portal/brisanje/{slug}', ['as' => 'admin-portal-delete', 'uses' => 'NewsController@deleteNews'])->where(['slug' => '[\w\-šđčćžŠĐČĆŽ]+']);
 
+	//gallery
+	Route::get('admin/galerija', ['as' => 'admin-gallery', 'uses' => 'GalleryController@showGallery']);
 
 });
 
@@ -61,6 +63,9 @@ Route::get('login', ['as' => 'login', 'uses' => 'LoginController@showLogin']);
 /**
  * public area
  */
+
+Route::get('cage-football', ['as' => 'cage-football', 'uses' => 'PagesController@showCageFootball']);
+Route::get('caffe-bar', ['as' => 'caffe-bar', 'uses' => 'PagesController@showCaffeBar']);
 
 Route::post('kontakt', ['as' => 'kontaktPost', 'uses' => 'PublicController@sendMail']);
 Route::get('kontakt', ['as' => 'kontakt', 'uses' => 'PublicController@showContact']);

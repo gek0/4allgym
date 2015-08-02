@@ -6,7 +6,7 @@
 <!--[if (gt IE 9)|!(IE)]><!--> <html lang="hr" class="no-js"> <!--<![endif]-->
 <head>
     <meta charset="utf-8">
-    <title>4AllGym :: {{ $page_title or '' }}</title>
+    <title>4AllGym :: {{ $page_title or 'kondicijski centar' }}</title>
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="keywords" content="4allGym, kondicijska, pripreme, centar, gym, teretana, mma, zagreb">

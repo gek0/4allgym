@@ -234,6 +234,15 @@ class PagesController extends BaseController
 
                 //delete image if exists and return JSON response
                 if($image){
+                    //check if primary and if last one
+                    $num_of_page_images_left = PagesImage::where('page_id', '=', $image->page_id)->count();
+                    if($image->is_primary == 'yes' && $num_of_page_images_left > 1){
+                        return Response::json(['status' => 'error',
+                                                'errors' => 'Primarna slika se ne može obrisati (ako nije zadnja preostala).'
+                                            ]);
+                    }
+
+
                     try{
                         $file_name = public_path().'/pages_uploads/'.$image->file_name;
                         if(File::exists($file_name)){
@@ -314,4 +323,51 @@ class PagesController extends BaseController
                                 ]);
         }
     }
+
+    /**
+     * show caffe bar page
+     * @return mixed
+     */
+    public function showCaffeBar()
+    {
+        //get caffe bar data and all images
+        $caffe_bar_data = Pages::where('page_uri', '=', 'admin-'.Route::currentRouteName())->first();
+        $caffe_bar_images = PagesImage::where('page_id', '=', $caffe_bar_data->id)->get();
+
+        //get primary image
+        $caffe_bar_primary_image = false;
+        if($caffe_bar_images->count() > 0){
+            $caffe_bar_primary_image = PagesImage::where('page_id', '=', $caffe_bar_data->id)->where('is_primary', '=', 'yes')->first();
+        }
+
+        return View::make('public.caffe-bar')->with(['caffe_bar_data' => $caffe_bar_data,
+                                                    'caffe_bar_images' => $caffe_bar_images,
+                                                    'caffe_bar_primary_image' => $caffe_bar_primary_image,
+                                                    'page_title' => $caffe_bar_data->page_title
+                                                ]);
+    }
+
+    /**
+     * show cage football page
+     * @return mixed
+     */
+    public function showCageFootball()
+    {
+        //get cage football data and all images
+        $cage_football_data = Pages::where('page_uri', '=', 'admin-'.Route::currentRouteName())->first();
+        $cage_football_images = PagesImage::where('page_id', '=', $cage_football_data->id)->get();
+
+        //get primary image
+        $cage_football_primary_image = false;
+        if($cage_football_images->count() > 0){
+            $cage_football_primary_image = PagesImage::where('page_id', '=', $cage_football_data->id)->where('is_primary', '=', 'yes')->first();
+        }
+
+        return View::make('public.cage-football')->with(['cage_football_data' => $cage_football_data,
+                                                        'cage_football_images' => $cage_football_images,
+                                                        'cage_football_primary_image' => $cage_football_primary_image,
+                                                        'page_title' => $cage_football_data->page_title
+                                                    ]);
+    }
+
 }
