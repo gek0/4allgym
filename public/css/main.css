@@ -74,6 +74,10 @@ body {
     color: #fff;
 }
 
+a.content-holder{ text-decoration: none; }
+
+a.content-holder:visited{ color: #fff; }
+
 /**
 *   font size
 */
@@ -963,12 +967,23 @@ hr{
 
 .bootbox-body { font-size: 1.5em; }
 
+.gray{ color: rgba(119, 119, 119, 1); }
+
 
 .row-eq-height {
     display: -webkit-box;
     display: -webkit-flex;
     display: -ms-flexbox;
     display: flex;
+}
+
+.list-group-item{
+    background-color: rgba(0, 0, 0, 0.2);
+    border: 1px solid rgba(251, 209, 97, 0.25);
+}
+
+.info-text{
+    font-size: 1.25em;
 }
 
 .small-marg { margin: .5em 0; }
@@ -1028,6 +1043,15 @@ hr{
 .sidebar-content {
     width: 100%; height: auto;
     margin: 2em auto; padding: 0;
+}
+
+.content-header-image{
+    border: none;
+    width: 80%;
+}
+.content-header-no-image{
+    border: none;
+    width: 40%;
 }
 
 

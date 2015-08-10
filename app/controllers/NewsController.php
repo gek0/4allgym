@@ -153,11 +153,11 @@ class NewsController extends BaseController
     }
 
     /**
-     * show individual news page
+     * show individual news page in admin area
      * @param null $slug
      * @return mixed
      */
-    public function showNews($slug = null)
+    public function showNewsAdmin($slug = null)
     {
         if ($slug !== null){
             $news_data = News::findBySlug(e($slug));
@@ -489,6 +489,74 @@ class NewsController extends BaseController
         }
         else{
             return Redirect::to('admin/portal')->withErrors('Vijest ne postoji.');
+        }
+    }
+
+    /**
+     * show news portal homepage in public area
+     * @return mixed
+     */
+    public function showNewsPortal()
+    {
+        //get news
+        $news_data = News::orderBy('id', 'DESC')->paginate(9);
+
+        return View::make('public.portal.index')->with(['news_data' => $news_data]);
+    }
+
+    /**
+     * show individual news page
+     * @param null $slug
+     * @return mixed
+     */
+    public function showNews($slug = null)
+    {
+        if ($slug !== null){
+            $news_data = News::findBySlug(e($slug));
+
+            //check if news exists
+            if($news_data){
+
+                //increment number of visits
+                if((!Session::get('read_news') || !in_array($news_data->id, Session::get('read_news')))){
+                    Session::push('read_news', $news_data->id);
+                    $news_data->increment('num_visited');
+                }
+
+                //find previous and next person after current
+                $previous_news = $news_data->previousNews();
+                $next_news = $news_data->nextNews();
+
+                //check if there are persons before/after or not
+                if($previous_news){
+                    $previous_news = ['slug' => $previous_news->slug, 'news_title' => $previous_news->news_title];
+                }
+                else{
+                    $previous_news = false;
+                }
+
+                if($next_news){
+                    $next_news = ['slug' => $next_news->slug, 'news_title' => $next_news->news_title];
+                }
+                else{
+                    $next_news = false;
+                }
+
+                //take 3 random news
+                $random_news = News::orderBy(DB::raw('RAND()'))->take(3)->get();
+
+                return View::make('public.portal.pregled')->with(['news_data' => $news_data,
+                                                                    'previous_news' => $previous_news,
+                                                                    'next_news' => $next_news,
+                                                                    'random_news' => $random_news
+                                                                ]);
+            }
+            else{
+                return Redirect::to('portal')->withErrors('Vijest ne postoji.');
+            }
+        }
+        else{
+            return Redirect::to('portal')->withErrors('Vijest ne postoji.');
         }
     }
 

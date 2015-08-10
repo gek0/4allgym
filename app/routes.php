@@ -39,7 +39,7 @@ Route::group(['before' => 'auth'], function() {
 	Route::post('admin/portal/gallery-image-delete', ['as' => 'admin-portal-gallery-image-delete', 'uses' => 'NewsController@deleteNewsGalleryImage']);
 	Route::get('admin/portal/dodaj', ['as' => 'admin-portal-add', 'uses' => 'NewsController@showNewNewsForm']);
 	Route::post('admin/portal/dodaj', ['as' => 'admin-portal-addPost', 'uses' => 'NewsController@addNewNews']);
-	Route::get('admin/portal/pregled/{slug}', ['as' => 'admin-portal-show', 'uses' => 'NewsController@showNews'])->where(['slug' => '[\w\-šđčćžŠĐČĆŽ]+']);
+	Route::get('admin/portal/pregled/{slug}', ['as' => 'admin-portal-show', 'uses' => 'NewsController@showNewsAdmin'])->where(['slug' => '[\w\-šđčćžŠĐČĆŽ]+']);
 	Route::get('admin/portal/izmjena/{slug}', ['as' => 'admin-portal-edit', 'uses' => 'NewsController@showNewsEditForm'])->where(['slug' => '[\w\-šđčćžŠĐČĆŽ]+']);
 	Route::post('admin/portal/izmjena/{slug}', ['as' => 'admin-portal-editPost', 'uses' => 'NewsController@updateNews'])->where(['slug' => '[\w\-šđčćžŠĐČĆŽ]+']);
 	Route::get('admin/portal/brisanje/{slug}', ['as' => 'admin-portal-delete', 'uses' => 'NewsController@deleteNews'])->where(['slug' => '[\w\-šđčćžŠĐČĆŽ]+']);
@@ -63,6 +63,9 @@ Route::get('login', ['as' => 'login', 'uses' => 'LoginController@showLogin']);
 /**
  * public area
  */
+
+Route::get('portal', ['as' => 'portal', 'uses' => 'NewsController@showNewsPortal']);
+Route::get('portal/pregled/{slug}', ['as' => 'portal-show', 'uses' => 'NewsController@showNews'])->where(['slug' => '[\w\-šđčćžŠĐČĆŽ]+']);
 
 Route::get('cage-football', ['as' => 'cage-football', 'uses' => 'PagesController@showCageFootball']);
 Route::get('caffe-bar', ['as' => 'caffe-bar', 'uses' => 'PagesController@showCaffeBar']);
