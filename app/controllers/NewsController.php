@@ -11,6 +11,13 @@ class NewsController extends BaseController
         $this->beforeFilter('crfs', ['on' => ['post', 'put', 'patch', 'delete']]);
     }
 
+    protected $news_paginate = 9;
+    protected $sort_data = ['added_desc' => 'Najnovije vijesti',
+                                'added_asc' => 'Najstarije vijesti',
+                                'visits_desc' => 'S najviše pregleda',
+                                'visits_asc' => 'S najmanje pregleda'
+                            ];
+
     /**
      * show news portal homepage in admin area
      * @return mixed
@@ -499,9 +506,111 @@ class NewsController extends BaseController
     public function showNewsPortal()
     {
         //get news
-        $news_data = News::orderBy('id', 'DESC')->paginate(9);
+        $news_data = News::orderBy('id', 'DESC')->paginate($this->news_paginate);
 
-        return View::make('public.portal.index')->with(['news_data' => $news_data]);
+        //default form sort value
+        $news_text_sort = null;
+        $sort_category = null;
+        $sort_data = $this->sort_data;
+
+        return View::make('public.portal.index')->with(['news_data' => $news_data,
+                                                            'sort_data' => $sort_data,
+                                                            'sort_category' => $sort_category,
+                                                            'news_text_sort' => $news_text_sort,
+                                                            'page_title' => 'Portal'
+                                                        ]);
+    }
+
+    /**
+     * show news portal homepage in public area sorted by user parameters
+     * @return mixed
+     */
+    public function showSortedNews()
+    {
+        //get form data and set default sort options
+        $news_text_sort = e(Input::get('news_text_sort'));
+        $sort_category = e(Input::get('sort_option'));
+        $sort_data = $this->sort_data;
+
+        //check sort category selected in form and get data
+        switch($sort_category){
+            case 'added_desc':
+                if($news_text_sort == '') {
+                    $news_data = News::orderBy('id', 'DESC')->paginate($this->news_paginate);
+                }
+                else{
+                    $news_data = News::where('news_body', 'LIKE', '%'.$news_text_sort.'%')->orderBy('id', 'DESC')->paginate($this->news_paginate);
+                }
+                break;
+            case 'added_asc':
+                if($news_text_sort == '') {
+                    $news_data = News::orderBy('id', 'ASC')->paginate($this->news_paginate);
+                }
+                else{
+                    $news_data = News::where('news_body', 'LIKE', '%'.$news_text_sort.'%')->orderBy('id', 'ASC')->paginate($this->news_paginate);
+                }
+                break;
+            case 'visits_desc':
+                if($news_text_sort == '') {
+                    $news_data = News::orderBy('num_visited', 'DESC')->paginate($this->news_paginate);
+                }
+                else{
+                    $news_data = News::where('news_body', 'LIKE', '%'.$news_text_sort.'%')->orderBy('num_visited', 'DESC')->paginate($this->news_paginate);
+                }
+                break;
+            case 'visits_asc':
+                if($news_text_sort == '') {
+                    $news_data = News::orderBy('num_visited', 'ASC')->paginate($this->news_paginate);
+                }
+                else{
+                    $news_data = News::where('news_body', 'LIKE', '%'.$news_text_sort.'%')->orderBy('num_visited', 'ASC')->paginate($this->news_paginate);
+                }
+                break;
+            default:
+                if($news_text_sort == '') {
+                    $news_data = News::orderBy('id', 'DESC')->paginate($this->news_paginate);
+                }
+                else{
+                    $news_data = News::where('news_body', 'LIKE', '%'.$news_text_sort.'%')->orderBy('id', 'DESC')->paginate($this->news_paginate);
+                }
+        }
+
+        return View::make('public.portal.index')->with(['news_data' => $news_data,
+                                                    'page_title' => 'Portal',
+                                                    'sort_data' => $sort_data,
+                                                    'sort_category' => $sort_category,
+                                                    'news_text_sort' => $news_text_sort
+                                                ]);
+    }
+
+    /**
+     * show news portal filtered by tags in public area
+     * @param null $tag_slug
+     * @return mixed
+     */
+    public function showNewsByTag($tag_slug = null)
+    {
+        //check if tag exists
+        $tag_data = Tag::findBySlug(e($tag_slug));
+
+        if($tag_data){
+            $news_data = DB::table('news')->select(DB::raw('news.*, (SELECT news_images.`file_name` FROM news_images
+                                                                        WHERE news_images.news_id= news.id
+                                                                        ORDER BY news_images.`id` ASC
+                                                                        LIMIT 1) AS newsImage'))
+                                            ->join('news_tag', 'news.id', '=', 'news_tag.news_id')
+                                            ->where('news_tag.tag_id', '=', $tag_data->id)
+                                            ->orderBy('news.id', 'DESC')
+                                            ->paginate($this->news_paginate);
+
+            return View::make('public.portal.tags-filtered')->with(['page_title' => 'Portal',
+                                                                    'tag_data' => $tag_data,
+                                                                    'news_data' => $news_data
+                                                                ]);
+        }
+        else{
+            return Redirect::to('portal')->withErrors('Tag vijest ne postoji.');
+        }
     }
 
     /**
@@ -548,7 +657,8 @@ class NewsController extends BaseController
                 return View::make('public.portal.pregled')->with(['news_data' => $news_data,
                                                                     'previous_news' => $previous_news,
                                                                     'next_news' => $next_news,
-                                                                    'random_news' => $random_news
+                                                                    'random_news' => $random_news,
+                                                                    'page_title' => $news_data->news_title
                                                                 ]);
             }
             else{

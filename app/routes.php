@@ -65,7 +65,10 @@ Route::get('login', ['as' => 'login', 'uses' => 'LoginController@showLogin']);
  */
 
 Route::get('portal', ['as' => 'portal', 'uses' => 'NewsController@showNewsPortal']);
+Route::get('portal/sort', ['as' => 'portal-sort', 'uses' => 'NewsController@showSortedNews']);
 Route::get('portal/pregled/{slug}', ['as' => 'portal-show', 'uses' => 'NewsController@showNews'])->where(['slug' => '[\w\-šđčćžŠĐČĆŽ]+']);
+Route::get('portal/tag/{slug}', ['as' => 'portal-tag', 'uses' => 'NewsController@showNewsByTag'])->where(['slug' => '[\w\-šđčćžŠĐČĆŽ]+']);
+Route::get('tagovi', ['as' => 'tags', 'uses' => 'PublicController@showTags']);
 
 Route::get('cage-football', ['as' => 'cage-football', 'uses' => 'PagesController@showCageFootball']);
 Route::get('caffe-bar', ['as' => 'caffe-bar', 'uses' => 'PagesController@showCaffeBar']);

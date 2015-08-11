@@ -62,6 +62,51 @@ jQuery(document).ready(function(){
             effect : "fadeIn"
         });
     });
+
+    /*
+     *   live tags filtering
+     */
+    if($("#filter").length > 0) {
+        //prevent submit action if user tried
+        $("#live-search").submit(function(event){
+            event.preventDefault();
+        })
+
+        //start search/filter function
+        $("#filter").keyup(function () {
+            $("#filter-count").text("Tražim...");
+
+            var filter = $(this).val(), count = 0;
+
+            $(".tags li").each(function () {
+                if ($(this).text().search(new RegExp(filter, "i")) < 0) {
+                    $(this).fadeOut();
+                }
+                else {
+                    $(this).show();
+                    count++;
+                }
+            });
+
+            setTimeout(function () {
+                if(count > 0) {
+                    $("#filter-count").text('Klknite na traženi tag za prikaz svih vijesti s istim.');
+                }
+                else{
+                    $("#filter-count").text('Nije pronađen niti jedan tag.');
+                }
+            }, 1500);
+        });
+    }
+
+    /*
+     *   submit form if option changed in dropdown menu
+     */
+    if($('#sort_option').length > 0) {
+        $(this).change(function () {
+            $('#formSort').submit();
+        });
+    }
 });
 
 /**
@@ -129,7 +174,7 @@ function catchLaravelNotification(errorHtmlSourceID, notificationType) {
             },
         //arrows
             arrowsOn = function(instance, selector){
-                var $arrows = $('<button type="button" class="imagelightbox-arrow imagelightbox-arrow-left" title="Prethodna"></button><button type="button" class="imagelightbox-arrow imagelightbox-arrow-right" title="Sljede�a"></button>');
+                var $arrows = $('<button type="button" class="imagelightbox-arrow imagelightbox-arrow-left" title="Prethodna"></button><button type="button" class="imagelightbox-arrow imagelightbox-arrow-right" title="Sljede�a"></button>');
                 $arrows.appendTo('body');
 
                 $arrows.on('click touchend', function(e){

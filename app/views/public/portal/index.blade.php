@@ -3,7 +3,35 @@
 <section class="section main-content" id="main">
     <h1 class="section-header">Portal</h1>
 
-        @if(count($news_data->all()) > 0)
+    <section id="news_sort">
+        <div class="row text-center" id="person_sort">
+            <div class="col-md-12">
+                <a href="{{ url('tagovi') }}"><button class="btn btn-submit"><i class="fa fa-tags fa-med pr-10"></i> Lista svih tagova</button></a>
+            </div>
+            <div class="space"></div>
+            <div class="formSort padded">
+                {{ Form::open(['url' => 'portal/sort', 'method' => 'GET', 'id' => 'formSort', 'role' => 'form']) }}
+                <div class="col-md-6">
+                    <div class="form-group">
+                        {{ Form::label('sort_option', 'Sortiranje vijesti:') }}<br>
+                        {{ Form::select('sort_option', ['Vrsta sortiranja...' => $sort_data],
+                                          $sort_category, ['class' => 'selectpicker show-tick', 'data-style' => 'btn-submit', 'title' => 'Vrsta sortiranja...', 'data-size' => '5'])
+                        }}
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        {{ Form::label('news_text_sort', 'Pretraga po tekstu vijesti:') }}
+                        {{ Form::text('news_text_sort', $news_text_sort, ['id' => 'news_text', 'class' => 'form-input-control', 'placeholder' => 'Tekst vijesti...']) }}
+                    </div>
+                </div>
+                {{ Form::close() }}
+            </div>
+        </div>
+    </section> <!-- end news_sort section -->
+    <div class="space"></div>
+
+    @if(count($news_data->all()) > 0)
             @foreach(array_chunk($news_data->all(), 3) as $news)
                 <div class="row padded marginated-center">
                     @foreach($news as $item)
@@ -47,6 +75,5 @@
 
 {{-- include session notification output --}}
 @include('admin.notification')
-
 
 @include('publicLayout.footer')

@@ -107,7 +107,7 @@ blockquote { font-size: 1.25em; line-height: 1.25; }
 
 a{
     color: #dddddd;
-    text-decoration: underline;
+    /*text-decoration: underline;*/
 }
 a:visited, a:hover, a:active{
     color: #958048;
@@ -982,6 +982,20 @@ hr{
     border: 1px solid rgba(251, 209, 97, 0.25);
 }
 
+.dropdown-menu{
+    background-color: rgba(0, 0, 0, 0.2);
+    border: 1px solid rgba(251, 209, 97, 0.25);
+}
+.dropdown-menu > li > a{ color: #fff; }
+.dropdown-menu > li.selected > a{
+    background-color: rgba(251, 209, 97, 0.75);
+    color: #fff;
+}
+.dropdown-menu > li > a:hover{
+    background-color: rgba(251, 209, 97, 0.75);
+    color: #fff;
+}
+
 .info-text{
     font-size: 1.25em;
 }
@@ -1032,6 +1046,11 @@ hr{
 .padded{ padding: 1.1em; }
 
 .marginated{ margin: .625em; }
+
+.centered-col {
+    float: none;
+    margin: .1em auto;
+}
 
 .marginated-center{ margin: .625em auto; }
 

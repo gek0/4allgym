@@ -117,4 +117,17 @@ class PublicController extends BaseController
         return View::make('public.onama')->with(['page_title' => 'O nama']);
     }
 
+    /**
+     * show all news tags
+     * @return mixed
+     */
+    public function showTags()
+    {
+        $tags_data = Tag::all();
+
+        return View::make('public.tagovi')->with(['tags_data' => $tags_data,
+                                                    'page_title' => 'Tagovi'
+                                                ]);
+    }
+
 }
