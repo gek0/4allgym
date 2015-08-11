@@ -2,6 +2,7 @@
 <project version="4">
   <component name="Encoding">
     <file url="file://$PROJECT_DIR$/app/controllers/AdminController.php" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/app/controllers/GalleryController.php" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/app/controllers/LoginController.php" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/app/controllers/NewsController.php" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/app/controllers/PagesController.php" charset="UTF-8" />
@@ -14,6 +15,7 @@
     <file url="file://$PROJECT_DIR$/app/models/User.php" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/app/routes.php" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/app/validators.php" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/app/views/admin/gallery.blade.php" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/app/views/admin/notification.blade.php" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/app/views/admin/portal/index.blade.php" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/app/views/admin/portal/izmjena.blade.php" charset="UTF-8" />

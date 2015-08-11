@@ -515,4 +515,94 @@ jQuery(document).ready(function(){
         return false;
     });
 
+    /**
+     * delete file from gallery
+     */
+    $('.btn-delete-gallery-file').click(function(){
+        var fileID = $(this).attr('id'); //image ID to delete
+        var token = $('meta[name="_token"]').attr('content');
+        var outputMsg = $('#outputMsg');
+        var errorMsg = "";
+        var successMsg = "<h3>Datoteka je uspješno obrisana.</h3>";
+
+        //gallery counter
+        var gallery = $('#gallery_data');
+        var dataURL = gallery.attr('data-role-link');
+
+        function restoreNotification(){
+            outputMsg.fadeOut(1000, function(){
+                outputMsg.find('h3').remove();
+                $('#notificationTimer').empty();
+
+                setTimeout(function () {
+                    outputMsg.attr('class', 'notificationOutput');
+                }, 1000);
+            });
+        }
+
+        $.ajax({
+            type: 'post',
+            url: dataURL,
+            dataType: 'json',
+            headers: { 'X-CSRF-Token' : token },
+            data: { fileData: fileID },
+            success: function(data){
+
+                //check status of validation and query
+                if(data.status === 'success'){
+                    outputMsg.append(successMsg).addClass('successNotif').slideDown();
+                    $('#container-'+fileID).fadeOut();   //hide parent div
+
+                    //timer
+                    var numSeconds = 3;
+                    var timer = 3;
+                    function countDown(){
+                        numSeconds--;
+                        if(numSeconds == 0){
+                            clearInterval(timer);
+                        }
+                        $('#notificationTimer').html(numSeconds);
+                    }
+                    timer = setInterval(countDown, 1000);
+
+                    //hide notification if user clicked
+                    $('#notifTool').click(function(){
+                        restoreNotification();
+                    });
+
+                    setTimeout(function(){
+                        restoreNotification();
+                    }, numSeconds * 1000);
+                }
+                else{
+                    errorMsg = "<h3>" + data.errors + "</h3>";
+                    outputMsg.append(errorMsg).addClass('warningNotif').slideDown();
+
+                    //timer
+                    var numSeconds = 5;
+                    var timer = 5;
+                    function countDown(){
+                        numSeconds--;
+                        if(numSeconds == 0){
+                            clearInterval(timer);
+                        }
+                        $('#notificationTimer').html(numSeconds);
+                    }
+                    timer = setInterval(countDown, 1000);
+
+                    //hide notification if user clicked
+                    $('#notifTool').click(function(){
+                        restoreNotification();
+                    });
+
+                    setTimeout(function(){
+                        restoreNotification();
+                    }, numSeconds * 1000);
+                }
+            }
+        });
+
+        return false;
+    });
+
 });

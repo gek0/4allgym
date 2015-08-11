@@ -215,6 +215,30 @@ footer{
 }
 
 /**
+*   tabs
+*/
+/**
+*   tabs
+*/
+.nav-tabs > li > a{
+    border: 1px solid rgba(251, 209, 97, .25);
+    background-color: rgba(0, 0, 0, .2);
+    color: inherit;
+    border-radius: 0; -moz-border-radius: 0; -webkit-border-radius: 0;
+}
+
+.nav-tabs > li.active > a,
+.nav-tabs > li.active > a:focus,
+.nav-tabs > li.active > a:hover,
+.nav-tabs > li > a:hover{
+    background-color: rgba(251, 209, 97, .75);
+    border: 1px solid rgba(251, 209, 97, .25);
+    color: #FFFFFF;
+}
+
+.nav-tabs{ border-bottom: 1px solid rgba(251, 209, 97, .25); }
+
+/**
 *   login layout
 */
 .loginMainBox{
