@@ -49,6 +49,21 @@ Route::group(['before' => 'auth'], function() {
 	Route::post('admin/galerija/dodaj', ['as' => 'admin-gallery-add', 'uses' => 'GalleryController@uploadToGallery']);
 	Route::post('admin/galerija/brisanje', ['as' => 'admin-gallery-delete', 'uses' => 'GalleryController@deleteGalleryFile']);
 
+	//shop
+	Route::get('admin/shop', ['as' => 'admin-shop', 'uses' => 'ProductController@showShopAdmin']);
+	Route::get('admin/shop/kategorije', ['as' => 'admin-shop-categories', 'uses' => 'ProductController@showShopCategoriesAdmin']);
+	Route::post('admin/shop/kategorije', ['as' => 'admin-shop-categoriesPost', 'uses' => 'ProductController@addProductCategories']);
+	Route::get('admin/shop/category-sort', ['as' => 'admin-shop-sort', 'uses' => 'ProductController@sortProductsByCategory']);
+	Route::post('admin/shop/kategorije/brisanje', ['as' => 'admin-shop-categories-deletePost', 'uses' => 'ProductController@deleteProductCategories']);
+	Route::post('admin/shop/kategorije/izmjena', ['as' => 'admin-shop-categories-editPost', 'uses' => 'ProductController@editProductCategories']);
+	Route::get('admin/shop/proizvod/dodaj', ['as' => 'admin-shop-product-add', 'uses' => 'ProductController@showNewProductForm']);
+	Route::post('admin/shop/proizvod/dodaj', ['as' => 'admin-shop-product-addPost', 'uses' => 'ProductController@addNewProduct']);
+	Route::get('admin/shop/proizvod/pregled/{slug}', ['as' => 'admin-shop-product-show', 'uses' => 'ProductController@showProductAdmin'])->where(['slug' => '[\w\-šđčćžŠĐČĆŽ]+']);
+	Route::get('admin/shop/proizvod/brisanje/{slug}', ['as' => 'admin-shop-product-delete', 'uses' => 'ProductController@deleteProduct'])->where(['slug' => '[\w\-šđčćžŠĐČĆŽ]+']);
+	Route::get('admin/shop/proizvod/izmjena/{slug}', ['as' => 'admin-shop-product-edit', 'uses' => 'ProductController@showProductEditForm'])->where(['slug' => '[\w\-šđčćžŠĐČĆŽ]+']);
+	Route::post('admin/shop/proizvod/izmjena', ['as' => 'admin-shop-product-editPost', 'uses' => 'ProductController@updateProduct']);
+
+
 });
 
 /**

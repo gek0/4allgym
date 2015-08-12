@@ -19,7 +19,9 @@ HTML::macro('smartRoute_link', function($route, $text, $icon = '') {
  * safe name, no croatian letters
  */
 function safe_name($string) {
-    $string = preg_replace('/&scaron;/', 's', $string);   //'�' letter fix
+    $string = preg_replace('/&scaron;/', 's', $string);   //'š' letter fix
+    $string = preg_replace('/&quot;/', '', $string);   //'"' double quote fix
+    $string = preg_replace('/&#039;/', '', $string);   //'\'' single quote fix
     $trans = ["š" => "s", "ć" => "c", "č" => "c", "đ" => "d", "ž" => "z", " " => "_", ">" => "", "<" => ""];
 
     return strtr(mb_strtolower($string, "UTF-8"), $trans);

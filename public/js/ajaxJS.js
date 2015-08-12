@@ -605,4 +605,332 @@ jQuery(document).ready(function(){
         return false;
     });
 
+    /**
+     * add new product category
+     */
+    $("#new-category").submit(function(event){
+        event.preventDefault();
+
+        //disable button click
+        $('button#categorySubmit').addClass('disabled');
+
+        //get input fields values
+        var formInputData = $(this).find('input[name="category_name"]').val();
+        var token = $(this).find('input[name="_token"]').val();
+        var outputMsg = $('#outputMsg');
+        var errorMsg = "";
+        var successMsg = "<h3>Kategorija je uspješno dodana.</h3>";
+
+        function restoreNotification(){
+            outputMsg.fadeOut(1000, function(){
+                //enable button click and reset form
+                $('button#categorySubmit').removeClass('disabled');
+                $("#new-category").trigger('reset');
+
+                outputMsg.find('h3').remove();
+                $('#notificationTimer').empty();
+
+                setTimeout(function () {
+                    outputMsg.attr('class', 'notificationOutput');
+                }, 1000);
+            });
+        }
+
+        $.ajax({
+            type: 'post',
+            url: $(this).attr('action'),
+            dataType: 'json',
+            headers: { 'X-CSRF-Token' : token },
+            data: { _token: token, formData: formInputData },
+            success: function(data){
+
+                //check status of validation and query
+                if(data.status === 'success'){
+                    //refresh category table
+                    $("#category-content-table").find('tbody').append('<tr id="' + data.insert_id +'" role="category-content-row">' +
+                                                                        '<td>' + formInputData + '</td>' +
+                                                                        '<td><button class="btn btn-submit-edit btn-edit-sure"><i class="fa fa-pencil"></i></button></td>' +
+                                                                        '<td><button class="btn btn-submit-delete btn-delete-sure"><i class="fa fa-trash"></i></button></td>' +
+                                                                        '</tr>');
+
+                    outputMsg.append(successMsg).addClass('successNotif').slideDown();
+
+                    //timer
+                    var numSeconds = 3;
+                    var timer = 3;
+                    function countDown(){
+                        numSeconds--;
+                        if(numSeconds == 0){
+                            clearInterval(timer);
+                        }
+                        $('#notificationTimer').html(numSeconds);
+                    }
+                    timer = setInterval(countDown, 1000);
+
+                    //hide notification if user clicked
+                    $('#notifTool').click(function(){
+                        restoreNotification();
+
+                    });
+
+                    setTimeout(function(){
+                        restoreNotification();
+                    }, numSeconds * 1000);
+                }
+                else{
+                    $.each(data.errors, function(index, value) {
+                        $.each(value, function(i){
+                            errorMsg += "<h3>" + value[i] + "</h3>";
+                        });
+                    });
+                    outputMsg.append(errorMsg).addClass('warningNotif').slideDown();
+
+                    //timer
+                    var numSeconds = 5;
+                    var timer = 5;
+                    function countDown(){
+                        numSeconds--;
+                        if(numSeconds == 0){
+                            clearInterval(timer);
+                        }
+                        $('#notificationTimer').html(numSeconds);
+                    }
+                    timer = setInterval(countDown, 1000);
+
+                    //hide notification if user clicked
+                    $('#notifTool').click(function(){
+                        restoreNotification();
+                    });
+
+                    setTimeout(function(){
+                        restoreNotification();
+                    }, numSeconds * 1000);
+                }
+            }
+        });
+
+        return false;
+    });
+
+    /**
+     *   edit product category name
+     */
+    $(".btn-edit-sure").click(function(){
+        var categoryID = parseInt($(this).parent().parent().attr('id'));    //get ID of category to delete
+        var categoryName = $('#category-content-table tr#' + categoryID + ' td:first-child').text().trim();
+        var outputMsg = $('#outputMsg');
+        var errorMsg = "";
+
+        function restoreNotification(){
+            outputMsg.fadeOut(1000, function(){
+                outputMsg.find('h3').remove();
+                $('#notificationTimer').empty();
+
+                setTimeout(function () {
+                    outputMsg.attr('class', 'notificationOutput');
+                }, 1000);
+            });
+        }
+
+        bootbox.prompt({
+            title: "Ime kategorije:",
+            value: categoryName,
+            callback: function(result) {
+                if(result == ''){
+                    errorMsg = "<h3>Ime kategorije je obavezno.</h3>";
+                    outputMsg.append(errorMsg).addClass('warningNotif').slideDown();
+
+                    //timer
+                    var numSeconds = 5;
+                    var timer = 5;
+                    function countDown(){
+                        numSeconds--;
+                        if(numSeconds == 0){
+                            clearInterval(timer);
+                        }
+                        $('#notificationTimer').html(numSeconds);
+                    }
+                    timer = setInterval(countDown, 1000);
+
+                    //hide notification if user clicked
+                    $('#notifTool').click(function(){
+                        restoreNotification();
+                    });
+
+                    setTimeout(function(){
+                        restoreNotification();
+                    }, numSeconds * 1000);
+                }
+                else if(result !== null) {
+                    var token = $('meta[name="_token"]').attr('content');
+                    var categoryName = result;
+                    var successMsg = "<h3>Ime kategorije je uspješno izmjenjeno.</h3>";
+                    var dataURL = $('#category-content-table').attr('data-link-edit');
+
+                    $.ajax({
+                        type: 'post',
+                        url: dataURL,
+                        dataType: 'json',
+                        headers: { 'X-CSRF-Token' : token },
+                        data: { categoryID: categoryID, categoryName: categoryName },
+                        success: function(data){
+
+                            //check status of validation and query
+                            if(data.status === 'success'){
+                                outputMsg.append(successMsg).addClass('successNotif').slideDown();
+
+                                //set new category name to DOM
+                                $('#category-content-table tr#' + categoryID + ' td:first-child').text(categoryName);
+
+                                //timer
+                                var numSeconds = 3;
+                                var timer = 3;
+                                function countDown(){
+                                    numSeconds--;
+                                    if(numSeconds == 0){
+                                        clearInterval(timer);
+                                    }
+                                    $('#notificationTimer').html(numSeconds);
+                                }
+                                timer = setInterval(countDown, 1000);
+
+                                //hide notification if user clicked
+                                $('#notifTool').click(function(){
+                                    restoreNotification();
+                                });
+
+                                setTimeout(function(){
+                                    restoreNotification();
+                                }, numSeconds * 1000);
+                            }
+                            else{
+                                errorMsg = "<h3>" + data.errors + "</h3>";
+                                outputMsg.append(errorMsg).addClass('warningNotif').slideDown();
+
+                                //timer
+                                var numSeconds = 5;
+                                var timer = 5;
+                                function countDown(){
+                                    numSeconds--;
+                                    if(numSeconds == 0){
+                                        clearInterval(timer);
+                                    }
+                                    $('#notificationTimer').html(numSeconds);
+                                }
+                                timer = setInterval(countDown, 1000);
+
+                                //hide notification if user clicked
+                                $('#notifTool').click(function(){
+                                    restoreNotification();
+                                });
+
+                                setTimeout(function(){
+                                    restoreNotification();
+                                }, numSeconds * 1000);
+                            }
+                        }
+                    });
+                }
+            }
+        });
+
+        return false;
+    });
+
+    /**
+     * delete product category
+     */
+    $('.btn-category-delete-sure').click(function(){
+        var categoryID = parseInt($(this).parent().parent().attr('id'));    //get ID of category to delete
+        var token = $('meta[name="_token"]').attr('content');
+        var dataURL = $('#category-content-table').attr('data-link-delete');
+        var outputMsg = $('#outputMsg');
+        var errorMsg = "";
+        var successMsg = "<h3>Kategorija je uspješno obrisana.</h3>";
+
+        function restoreNotification(){
+            outputMsg.fadeOut(1000, function(){
+                outputMsg.find('h3').remove();
+                $('#notificationTimer').empty();
+
+                setTimeout(function () {
+                    outputMsg.attr('class', 'notificationOutput');
+                }, 1000);
+            });
+        }
+
+        /*
+         *   delete product confirm
+         */
+        bootbox.confirm("Stvarno želiš obrisati ovu kategoriju?", function(result) {
+            if(result == true){
+                $.ajax({
+                    type: 'post',
+                    url: dataURL,
+                    dataType: 'json',
+                    headers: { 'X-CSRF-Token' : token },
+                    data: { categoryData: categoryID },
+                    success: function(data){
+
+                        //check status of validation and query
+                        if(data.status === 'success'){
+                            //hide table row when deleted from DB
+                            $('#category-content-table').find('tr#' + categoryID).fadeOut(1000);
+
+                            outputMsg.append(successMsg).addClass('successNotif').slideDown();
+
+                            //timer
+                            var numSeconds = 3;
+                            var timer = 3;
+                            function countDown(){
+                                numSeconds--;
+                                if(numSeconds == 0){
+                                    clearInterval(timer);
+                                }
+                                $('#notificationTimer').html(numSeconds);
+                            }
+                            timer = setInterval(countDown, 1000);
+
+                            //hide notification if user clicked
+                            $('#notifTool').click(function(){
+                                restoreNotification();
+                            });
+
+                            setTimeout(function(){
+                                restoreNotification();
+                            }, numSeconds * 1000);
+                        }
+                        else{
+                            errorMsg = "<h3>" + data.errors + "</h3>";
+                            outputMsg.append(errorMsg).addClass('warningNotif').slideDown();
+
+                            //timer
+                            var numSeconds = 5;
+                            var timer = 5;
+                            function countDown(){
+                                numSeconds--;
+                                if(numSeconds == 0){
+                                    clearInterval(timer);
+                                }
+                                $('#notificationTimer').html(numSeconds);
+                            }
+                            timer = setInterval(countDown, 1000);
+
+                            //hide notification if user clicked
+                            $('#notifTool').click(function(){
+                                restoreNotification();
+                            });
+
+                            setTimeout(function(){
+                                restoreNotification();
+                            }, numSeconds * 1000);
+                        }
+                    }
+                });
+            }
+        });
+
+        return false;
+    });
+
 });

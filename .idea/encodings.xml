@@ -6,11 +6,14 @@
     <file url="file://$PROJECT_DIR$/app/controllers/LoginController.php" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/app/controllers/NewsController.php" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/app/controllers/PagesController.php" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/app/controllers/ProductController.php" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/app/controllers/PublicController.php" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/app/controllers/UserController.php" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/app/functions.php" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/app/models/News.php" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/app/models/NewsImage.php" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/app/models/Product.php" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/app/models/ProductCategory.php" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/app/models/Tag.php" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/app/models/User.php" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/app/routes.php" charset="UTF-8" />
@@ -21,6 +24,9 @@
     <file url="file://$PROJECT_DIR$/app/views/admin/portal/izmjena.blade.php" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/app/views/admin/portal/nova.blade.php" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/app/views/admin/portal/pregled.blade.php" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/app/views/admin/shop/index.blade.php" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/app/views/admin/shop/kategorije.blade.php" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/app/views/admin/shop/pregled.blade.php" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/app/views/email.blade.php" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/app/views/error.blade.php" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/app/views/public/index.blade.php" charset="UTF-8" />

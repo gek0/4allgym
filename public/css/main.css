@@ -138,7 +138,7 @@ a:visited, a:hover, a:active{
     text-align: center;
 }
 .danger-notif{ color: #ff0000; }
-.info-notif{ color: #5BC0DE; }
+.info-notif{ color: #4ee663; }
 
 .light{ color: #fff; }
 
@@ -1007,7 +1007,7 @@ hr{
 }
 
 .dropdown-menu{
-    background-color: rgba(0, 0, 0, 0.2);
+    background-color: rgba(0, 0, 0, 0.5);
     border: 1px solid rgba(251, 209, 97, 0.25);
 }
 .dropdown-menu > li > a{ color: #fff; }
@@ -1018,6 +1018,15 @@ hr{
 .dropdown-menu > li > a:hover{
     background-color: rgba(251, 209, 97, 0.75);
     color: #fff;
+}
+.dropdown-menu > li.active > a:hover{
+    background-color: rgba(251, 209, 97, 0.75);
+    color: #fff;
+}
+
+div.thumbnail{
+    background-color: rgba(0, 0, 0, 0.2);
+    border: 1px solid rgba(251, 209, 97, 0.25);
 }
 
 .info-text{
