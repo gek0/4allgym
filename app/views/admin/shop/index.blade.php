@@ -33,13 +33,13 @@
                 <div class="row padded">
                     @foreach($product as $item)
                         <div class="col-sm-6 col-md-4">
-                            <div class="thumbnail">
+                            <div class="thumbnail news-all-content">
                                 @if($item->product_image != '')
                                     {{ HTML::image('/product_uploads/'.$item->id.'/'.$item->product_image, imageAlt($item->product_image), ['class' => 'thumbnail img-responsive lazy']) }}
                                 @else
                                     {{ HTML::image('css/assets/images/4allgym_no_image.png', 'Slika nije dostupna', ['class' => 'thumbnail img-responsive']) }}
                                 @endif
-                                <div class="caption">
+                                <div class="caption news-all-header">
                                     <h3 class="section-header">{{ $item->product_name }}</h3>
                                     <p class="text-center">
                                         <strong class="gray">Status:</strong>
@@ -89,6 +89,21 @@
         selectCategory.change(function(){
             $('#product-sort').submit();
         });
+
+
+        //set news header (title and logo) height equal (biggest dimension on page)
+        var maxHeightHeader = 0;
+        $(".news-all-header").each(function(){
+            if ($(this).height() > maxHeightHeader) { maxHeightHeader = $(this).height(); }
+        });
+        $(".news-all-header").height(maxHeightHeader);
+
+        //set whole news div height equal (biggest div height dimension on page)
+        var maxHeightContent = 0;
+        $(".news-all-content").each(function(){
+            if ($(this).height() > maxHeightContent) { maxHeightContent = $(this).height(); }
+        });
+        $(".news-all-content").height(maxHeightContent);
     });
 </script>
 

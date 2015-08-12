@@ -21,8 +21,8 @@ HTML::macro('smartRoute_link', function($route, $text, $icon = '') {
 function safe_name($string) {
     $string = preg_replace('/&scaron;/', 's', $string);   //'š' letter fix
     $string = preg_replace('/&quot;/', '', $string);   //'"' double quote fix
-    $string = preg_replace('/&#039;/', '', $string);   //'\'' single quote fix
-    $trans = ["š" => "s", "ć" => "c", "č" => "c", "đ" => "d", "ž" => "z", " " => "_", ">" => "", "<" => ""];
+    $string = preg_replace('/&#039;/', '', $string);   //''' single quote fix
+    $trans = ["š" => "s", "ć" => "c", "č" => "c", "đ" => "d", "ž" => "z", " " => "_", ">" => "", "<" => "", "." => "", "," => ""];
 
     return strtr(mb_strtolower($string, "UTF-8"), $trans);
 }
