@@ -87,6 +87,13 @@ Route::get('portal/pregled/{slug}', ['as' => 'portal-show', 'uses' => 'NewsContr
 Route::get('portal/tag/{slug}', ['as' => 'portal-tag', 'uses' => 'NewsController@showNewsByTag'])->where(['slug' => '[\w\-šđčćžŠĐČĆŽ]+']);
 Route::get('tagovi', ['as' => 'tags', 'uses' => 'PublicController@showTags']);
 
+Route::get('shop', ['as' => 'shop', 'uses' => 'ProductController@showShop']);
+Route::get('shop/search', ['as' => 'shop-search', 'uses' => 'ProductController@showShopWithSearch']);
+Route::get('shop/{category}', ['as' => 'shop-category', 'uses' => 'ProductController@showProductsByCategory'])->where(['category' => '[\w\-šđčćžŠĐČĆŽ]+']);
+Route::get('shop/{category}/search', ['as' => 'shop-category-search', 'uses' => 'ProductController@showProductsByCategoryWithSearch'])->where(['category' => '[\w\-šđčćžŠĐČĆŽ]+']);
+Route::get('shop/proizvod/pregled/{slug}', ['as' => 'shop-product-show', 'uses' => 'ProductController@showProduct'])->where(['slug' => '[\w\-šđčćžŠĐČĆŽ]+']);
+
+
 Route::get('cage-football', ['as' => 'cage-football', 'uses' => 'PagesController@showCageFootball']);
 Route::get('caffe-bar', ['as' => 'caffe-bar', 'uses' => 'PagesController@showCaffeBar']);
 

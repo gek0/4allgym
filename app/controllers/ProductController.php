@@ -30,6 +30,104 @@ class ProductController extends BaseController
     }
 
     /**
+     * show shop homepage in public area
+     * @return mixed
+     */
+    public function showShop()
+    {
+        //get products
+        $products_data = Product::orderBy('product_name', 'ASC')->paginate(6);
+
+        //get all categories from DB
+        $product_categories = ProductCategory::orderBy('category_name', 'ASC')->get();
+
+        return View::make('public.shop.index')->with(['products_data' => $products_data,
+                                                        'product_categories' => $product_categories,
+                                                        'search_param' => null
+                                                     ]);
+    }
+
+    /**
+     * show product in shop from selected category
+     * @param $slug
+     * @return mixed
+     */
+    public function showProductsByCategory($slug)
+    {
+        //find category
+        $category_data = ProductCategory::findBySlug($slug);
+
+        if($category_data){
+            //get products from selected category
+            $products_data = Product::where('category_id', '=', $category_data->id)->orderBy('product_name', 'ASC')->paginate(9);
+
+            return View::make('public.shop.category')->with(['products_data' => $products_data,
+                                                                'category_name' => $category_data->category_name,
+                                                                'slug' => $category_data->slug,
+                                                                'search_param' => null
+                                                            ]);
+        }
+        else{
+            return Redirect::to('shop')->withErrors('Kategorija ne postoji.');
+        }
+    }
+
+    /**
+     * show product in shop from selected category and search name
+     * @param $slug
+     * @return mixed
+     */
+    public function showProductsByCategoryWithSearch($slug)
+    {
+        //find category
+        $category_data = ProductCategory::findBySlug($slug);
+
+        if($category_data){
+            //get product name from input form
+            $product_name = e(Input::get('product_name_search'));
+
+            //get products from selected category
+            $products_data = Product::where('category_id', '=', $category_data->id)
+                                    ->where('product_name', 'LIKE', '%'.$product_name.'%')
+                                    ->orderBy('product_name', 'ASC')
+                                    ->paginate(9);
+
+            return View::make('public.shop.category')->with(['products_data' => $products_data,
+                                                                'category_name' => $category_data->category_name,
+                                                                'slug' => $category_data->slug,
+                                                                'search_param' => $product_name
+                                                            ]);
+        }
+        else{
+            return Redirect::to('shop')->withErrors('Kategorija ne postoji.');
+        }
+    }
+
+    /**
+     * show shop homepage in public area with only searched products
+     * @return mixed
+     */
+    public function showShopWithSearch()
+    {
+        //get product name from input form
+        $product_name = e(Input::get('product_name_search'));
+
+        //get all categories from DB
+        $product_categories = ProductCategory::orderBy('category_name', 'ASC')->get();
+
+        //get products from selected category
+        $products_data = Product::where('product_name', 'LIKE', '%'.$product_name.'%')
+                                    ->orderBy('product_name', 'ASC')
+                                    ->paginate(9);
+
+        return View::make('public.shop.index')->with(['products_data' => $products_data,
+                                                            'product_categories' => $product_categories,
+                                                            'search_param' => $product_name
+                                                        ]);
+
+    }
+
+    /**
      * show individual product in admin area
      * @param null $slug
      * @return mixed
@@ -44,6 +142,24 @@ class ProductController extends BaseController
         }
         else{
             return Redirect::to('admin/shop')->withErrors('Proizvod ne postoji.');
+        }
+    }
+
+    /**
+     * show individual product in public area
+     * @param null $slug
+     * @return mixed
+     */
+    public function showProduct($slug = null)
+    {
+        //get product
+        $product_data = Product::findBySlug($slug);
+
+        if($product_data){
+            return View::make('public.shop.pregled')->with(['product_data' => $product_data]);
+        }
+        else{
+            return Redirect::to('shop')->withErrors('Proizvod ne postoji.');
         }
     }
 
@@ -151,6 +267,10 @@ class ProductController extends BaseController
                     $category->category_name = $category_data['category_name'];
                     $category->save();
 
+                    //slug regenerate - croatian letter fix
+                    $category->slug = string_like_slug(safe_name(Input::get('formData')));
+                    $category->save();
+
                     return Response::json(['status' => 'success',
                                             'insert_id' => $category->id
                                         ]);
@@ -200,6 +320,10 @@ class ProductController extends BaseController
                         }
                         else{
                             $category->category_name = $category_data['category_name'];
+                            $category->save();
+
+                            //slug regenerate - croatian letter fix
+                            $category->slug = string_like_slug(safe_name(Input::get('categoryName')));
                             $category->save();
 
                             return Response::json(['status' => 'success']);

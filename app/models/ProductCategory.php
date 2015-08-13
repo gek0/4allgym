@@ -1,12 +1,21 @@
 <?php
+use Cviebrock\EloquentSluggable\SluggableInterface;
+use Cviebrock\EloquentSluggable\SluggableTrait;
 
-class ProductCategory extends Eloquent{
+class ProductCategory extends Eloquent implements SluggableInterface{
 
     /**
      * ProductCategory Database Model
      * 	-	id INT UNSIGNED / AUTO_INCREMENT PRIMARY KEY
      *  -	category_name VARCHAR(255) / UNIQUE
+     *  -   slug VARCHAR(255)
      */
+
+    use SluggableTrait;
+
+    protected $sluggable = ['build_from' => 'category_name',
+                                'save_to' => 'slug',
+                            ];
 
     /**
      * validation rules for news entities

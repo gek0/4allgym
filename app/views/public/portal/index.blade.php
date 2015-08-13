@@ -3,7 +3,7 @@
 <section class="section main-content" id="main">
     <h1 class="section-header">Portal</h1>
 
-    <section id="news_sort">
+    <section id="news_sort" class="section-inner">
         <div class="row text-center" id="person_sort">
             <div class="col-md-12">
                 <a href="{{ url('tagovi') }}"><button class="btn btn-submit"><i class="fa fa-tags fa-med pr-10"></i> Lista svih tagova</button></a>
@@ -68,8 +68,6 @@
                 <h2>Trenutno nema vijesti.</h2>
             </div>
         @endif
-
-    </section>  <!-- end section-inner -->
 
 </section> <!-- end #main -->
 
