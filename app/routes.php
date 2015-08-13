@@ -88,11 +88,16 @@ Route::get('portal/tag/{slug}', ['as' => 'portal-tag', 'uses' => 'NewsController
 Route::get('tagovi', ['as' => 'tags', 'uses' => 'PublicController@showTags']);
 
 Route::get('shop', ['as' => 'shop', 'uses' => 'ProductController@showShop']);
+Route::get('shop/kosarica', ['as' => 'shop-user-cart', 'uses' => 'ProductController@showCart']);
+Route::post('shop/kosarica', ['as' => 'shop-user-cartPost', 'uses' => 'ProductController@sendCartMail']);
+Route::get('shop/kosarica/dodavanje/{id}', ['as' => 'shop-user-cart-add-product', 'uses' => 'ProductController@addProductToCart'])->where(['id' => '[1-9][0-9]*']);
+Route::get('shop/kosarica/brisanje/{id}', ['as' => 'shop-user-cart-delete-product', 'uses' => 'ProductController@deleteProductFromCart'])->where(['id' => '[1-9][0-9]*']);
+Route::post('shop/kosarica/brisanje', ['as' => 'shop-user-cart-deletePost', 'uses' => 'ProductController@deleteCartItem']);
+Route::get('shop/kosarica/flush', ['as' => 'shop-user-cart-flush', 'uses' => 'ProductController@flushCart']);
 Route::get('shop/search', ['as' => 'shop-search', 'uses' => 'ProductController@showShopWithSearch']);
 Route::get('shop/{category}', ['as' => 'shop-category', 'uses' => 'ProductController@showProductsByCategory'])->where(['category' => '[\w\-šđčćžŠĐČĆŽ]+']);
 Route::get('shop/{category}/search', ['as' => 'shop-category-search', 'uses' => 'ProductController@showProductsByCategoryWithSearch'])->where(['category' => '[\w\-šđčćžŠĐČĆŽ]+']);
 Route::get('shop/proizvod/pregled/{slug}', ['as' => 'shop-product-show', 'uses' => 'ProductController@showProduct'])->where(['slug' => '[\w\-šđčćžŠĐČĆŽ]+']);
-
 
 Route::get('cage-football', ['as' => 'cage-football', 'uses' => 'PagesController@showCageFootball']);
 Route::get('caffe-bar', ['as' => 'caffe-bar', 'uses' => 'PagesController@showCaffeBar']);

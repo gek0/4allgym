@@ -7,6 +7,13 @@
 
         <div class="row">
             <div class="col-md-3">
+
+                <div class="well text-center">
+                    <a href="{{ URL::route('shop-user-cart') }}">
+                        <button class="btn btn-submit btn-padded" role="button"><i class="fa fa-shopping-cart fa-gig"></i><br>Vaša košarica</button>
+                    </a>
+                </div>
+
                 <section id="tools-content" class="space">
                     <div class="well">
                         <a href="{{ URL::route('shop') }}"><button class="btn btn-submit"><i class="fa fa-chevron-left"></i> Povratak na kategorije</button></a>
@@ -17,7 +24,7 @@
                             <div class="col-md-12">
                                 {{ Form::open(['url' => 'shop/'.$slug.'/search', 'method' => 'GET', 'id' => 'productSearch', 'role' => 'form']) }}
                                     <div class="form-group">
-                                        {{ Form::text('product_name_search', $search_param, ['id' => 'product_name_search', 'class' => 'form-input-control', 'placeholder' => 'Pronađite proizvod...']) }}
+                                        {{ Form::text('product_name_search', $search_param, ['id' => 'product_name_search', 'class' => 'form-input-control', 'placeholder' => 'Pronađite proizvod...', 'required']) }}
                                     </div>
                                     <div class="text-center">
                                         <button type="submit" class="btn btn-submit">Pronađi <i class="fa fa-search"></i></button>

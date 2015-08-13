@@ -984,6 +984,21 @@ textarea.form-input-control{
     color: #fff;
 }
 
+/* chrome, opera, ff - visited fix */
+.btn-submit:hover, .btn-submit:focus, .btn-submit:active{
+    color: #fff !important;
+}
+.btn-submit-edit:hover, .btn-submit-edit:focus, .btn-submit-edit:active{
+    color: #fff !important;
+}
+.btn-submit-delete:hover, .btn-submit-delete:focus, .btn-submit-delete:active{
+    color: #fff !important;
+}
+
+.btn-submit:visited, .btn-submit-edit:visited, .btn-submit-delete:visited{
+    color: #fff;
+}
+
 hr{
     background: rgba(251, 209, 97, 1);
     border-top: 1px solid rgba(0, 0, 0, .15);

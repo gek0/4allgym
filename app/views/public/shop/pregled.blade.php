@@ -35,6 +35,14 @@
                         </p>
                         <p><strong>Cijena:</strong> {{ $product_data->product_price }} kn</p>
                         <div class="space"></div>
+
+                        <div class="text-center">
+                            @if($in_cart)
+                                <a href="{{ URL::route('shop-user-cart-add-product', ['id' => $product_data->id]) }}" class="btn btn-submit-edit btn-padded-smaller">Dodaj u košaricu <i class="fa fa-check"></i></a>
+                            @else
+                                <a href="{{ URL::route('shop-user-cart-delete-product', ['id' => $product_data->id]) }}" class="btn btn-submit-delete btn-padded-smaller">Obriši iz košarice <i class="fa fa-trash"></i></a>
+                            @endif
+                        </div>
                     </div>
                 </div>
             </div>

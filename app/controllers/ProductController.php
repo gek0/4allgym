@@ -43,7 +43,8 @@ class ProductController extends BaseController
 
         return View::make('public.shop.index')->with(['products_data' => $products_data,
                                                         'product_categories' => $product_categories,
-                                                        'search_param' => null
+                                                        'search_param' => null,
+                                                        'page_title' => 'Shop'
                                                      ]);
     }
 
@@ -64,7 +65,8 @@ class ProductController extends BaseController
             return View::make('public.shop.category')->with(['products_data' => $products_data,
                                                                 'category_name' => $category_data->category_name,
                                                                 'slug' => $category_data->slug,
-                                                                'search_param' => null
+                                                                'search_param' => null,
+                                                                'page_title' => 'Shop'
                                                             ]);
         }
         else{
@@ -95,7 +97,8 @@ class ProductController extends BaseController
             return View::make('public.shop.category')->with(['products_data' => $products_data,
                                                                 'category_name' => $category_data->category_name,
                                                                 'slug' => $category_data->slug,
-                                                                'search_param' => $product_name
+                                                                'search_param' => $product_name,
+                                                                'page_title' => 'Shop'
                                                             ]);
         }
         else{
@@ -122,7 +125,8 @@ class ProductController extends BaseController
 
         return View::make('public.shop.index')->with(['products_data' => $products_data,
                                                             'product_categories' => $product_categories,
-                                                            'search_param' => $product_name
+                                                            'search_param' => $product_name,
+                                                            'page_title' => 'Shop'
                                                         ]);
 
     }
@@ -156,7 +160,17 @@ class ProductController extends BaseController
         $product_data = Product::findBySlug($slug);
 
         if($product_data){
-            return View::make('public.shop.pregled')->with(['product_data' => $product_data]);
+
+            //check if product is in cart
+            $in_cart = false;
+            if(!Session::get('user_products') || !in_array($product_data->id, Session::get('user_products'))){
+                $in_cart = true;
+            }
+
+            return View::make('public.shop.pregled')->with(['product_data' => $product_data,
+                                                            'page_title' => $product_data->product_name,
+                                                            'in_cart' => $in_cart
+                                                        ]);
         }
         else{
             return Redirect::to('shop')->withErrors('Proizvod ne postoji.');
@@ -584,6 +598,202 @@ class ProductController extends BaseController
         }
         else{
             return Redirect::to('admin/shop')->withErrors('Proizvod ne postoji.');
+        }
+    }
+
+    /**
+     * show user cart
+     * @return mixed
+     */
+    public function showCart()
+    {
+        //check if user has products in his cart
+        $user_cart = [];
+
+        if(!empty(Session::all('user_products')['user_products'])){
+            //grab product data from database for every product in session
+            foreach(Session::all('user_products')['user_products'] as $product){
+                $user_cart[] = Product::find($product);
+            }
+        }
+
+        return View::make('public.shop.kosarica')->with(['user_cart' => $user_cart,
+                                                    'page_title' => 'Košarica'
+                                                ]);
+    }
+
+    /**
+     * delete all items from user cart
+     * @return mixed
+     */
+    public function flushCart()
+    {
+        if(Session::has('user_products')){
+            Session::forget('user_products');
+        }
+
+        return Redirect::back()->with(['success' => 'Košarica je ispražnjena.']);
+    }
+
+    /**
+     * add product to user cart
+     * @param $id
+     * @return mixed
+     */
+    public function addProductToCart($id)
+    {
+        //check if product exists in database
+        $product = Product::find(e($id));
+
+        if($product){
+            //add product to session if not there already
+            if(!Session::get('user_products') || !in_array($id, Session::get('user_products'))){
+                Session::push('user_products', $id);
+            }
+
+            return Redirect::back()->with(['success' => 'Proizvod je uspješno dodan u košaricu.']);
+        }
+        else{
+            return Redirect::back()->withErrors('Greška! Proizvod nije dodan u košaricu.');
+        }
+    }
+
+    /**
+     * delete product from user cart
+     * @param $id
+     * @return mixed
+     */
+    public function deleteProductFromCart($id)
+    {
+        $array_index = array_search($id, Session::all('user_products')['user_products'], true);
+
+        if($array_index === false){
+            return Redirect::back()->withErrors('Proizvod nije mogao biti obrisan iz košarice.');
+        }
+        else{
+            Session::forget('user_products.' . $array_index);
+
+            return Redirect::back()->with(['success' => 'Proizvod je uspješno obrisan iz košarice.']);
+        }
+    }
+
+    /**
+     * delete cart item from session over Ajax request
+     * @return mixed
+     */
+    public function deleteCartItem()
+    {
+        if (Request::ajax()) {
+
+            //get form data
+            $cart_item_id = e(Input::get('cartData'));
+            $token = Input::get('_token');
+
+            //check if csrf token is valid
+            if(Session::token() != $token){
+                return Response::json(['status' => 'error',
+                                        'errors' => 'CSRF token is not valid.'
+                                    ]);
+            }
+            else {
+                $array_index = array_search($cart_item_id, Session::all('user_products')['user_products'], true);
+
+                if($array_index === false){
+                    return Response::json(['status' => 'error',
+                                            'errors' => 'Proizvod nije mogao biti obrisan iz košarice.'
+                                        ]);
+                }
+                else{
+                    Session::forget('user_products.' . $array_index);
+
+                    return Response::json(['status' => 'success']);
+                }
+            }
+        }
+        else{
+            return Response::json(['status' => 'error',
+                                    'errors' => 'Data not sent with Ajax.'
+                                ]);
+        }
+    }
+
+    /**
+     * send email to seller with cart and user form data over Ajax
+     * @return mixed
+     */
+    public function sendCartMail()
+    {
+        if (Request::ajax()) {
+
+            //define validator rules and messages
+            $rules = ['cart_full_name' => 'required|between:2,100',
+                        'cart_email' => 'required|email',
+                        'g-recaptcha-response' => 'required|captcha'
+                    ];
+
+            $messages = ['cart_full_name.required' => 'Zaboravili ste unjeti ime i prezime.',
+                            'cart_full_name.between' => 'Ime i prezime ne mogu biti dulji od 100 znakova i kraći od 2.',
+                            'cart_email.required' => 'E-mail adresa je obavezno polje.',
+                            'cart_email.email' => 'Unjeta e-mail adresa nije važeća.',
+                            'g-recaptcha-response.required' => 'Captcha je obavezna.',
+                            'g-recaptcha-response.captcha' => 'Captcha nije važeća.'
+                        ];
+
+            //get form data
+            $user_data = Input::get('cartUserData');
+            $cart_data = Input::get('cartItemData');
+
+            $token = Input::get('_token');
+            $user_data = ['cart_full_name' => e($user_data['cart_full_name']),
+                            'cart_email' => e($user_data['cart_email']),
+                            'cart_message_body' => e($user_data['cart_message_body']),
+                            'g-recaptcha-response' => e($user_data['g-recaptcha-response'])
+                        ];
+
+            //validate user data
+            $validator = Validator::make($user_data, $rules, $messages);
+
+            //check if csrf token is valid
+            if(Session::token() != $token){
+                return Response::json(['status' => 'error',
+                                        'errors' => 'CSRF token is not valid.'
+                                    ]);
+            }
+            else {
+                //check validation results and save user if ok
+                if($validator->fails()){
+                    return Response::json(['status' => 'error',
+                                            'errors' => $validator->getMessageBag()->toArray()
+                                        ]);
+                }
+                else{
+                    //convert all cart items form array to string
+                    $user_data += ['cart_items' => '<strong>'.implode('</strong><br> <strong>', $cart_data).'</strong>'];
+
+                    //send email
+                    try{
+                        Mail::send('public.shop.cart-email', $user_data, function($message) use ($user_data){
+                            $message->from($user_data['cart_email'], $user_data['cart_full_name']);
+                            $message->to(getenv('OWNER_CONTACT_EMAIL'))->subject('4allGym Shop - novi upit');
+                        });
+
+                        //clear session
+                        Session::flush('user_products');
+
+                        return Response::json(['status' => 'success']);
+                    }
+                    catch(Exception $e){
+                        return Response::json(['status' => 'error',
+                                                'errors' => 'Upit nije mogao biti poslan.'
+                                            ]);
+                    }
+                }
+            }
+        }
+        else{
+            return Response::json(['status' => 'error',
+                                    'errors' => 'Data not sent with Ajax.'
+                                ]);
         }
     }
 

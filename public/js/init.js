@@ -63,7 +63,7 @@ jQuery(document).ready(function(){
         });
     });
 
-    /*
+    /**
      *   live tags filtering
      */
     if($("#filter").length > 0) {
@@ -99,7 +99,7 @@ jQuery(document).ready(function(){
         });
     }
 
-    /*
+    /**
      *   submit form if option changed in dropdown menu
      */
     if($('#sort_option').length > 0) {
@@ -107,6 +107,212 @@ jQuery(document).ready(function(){
             $('#formSort').submit();
         });
     }
+
+    /**
+     *  Ajax cart items delete
+     */
+    $('.btn-cart-item-delete').click(function(event){
+        event.preventDefault();
+
+        var itemID = $(this).attr('id'); //cart item ID to delete
+        var token = $('#cart-form input[name="_token"]').val();
+        var outputMsg = $('#outputMsg');
+        var errorMsg = "";
+        var successMsg = "<h3>Košarica je osvježena.</h3>";
+
+        var cartView = $('#cart-content-view');
+        var cartItemContainer = $('#cartform-item-container-' + itemID);
+        var cartCounter = parseInt($('#cart-counter').html()) - 1;
+        var dataURL = $('#cart-form-container').attr('data-role-link');
+
+        function restoreNotification(){
+            outputMsg.fadeOut(1000, function(){
+                outputMsg.find('h3').remove();
+                $('#notificationTimer').empty();
+
+                setTimeout(function () {
+                    outputMsg.attr('class', 'notificationOutput');
+                }, 1000);
+            });
+        }
+
+        $.ajax({
+            type: 'post',
+            url: dataURL,
+            dataType: 'json',
+            data: { cartData: itemID, _token : token },
+            success: function(data){
+
+                //check status of validation and query
+                if(data.status === 'success'){
+                    outputMsg.append(successMsg).addClass('successNotif').slideDown();
+
+                    //hide cart item when deleted
+                    cartItemContainer.fadeOut();
+
+                    //update cart counter and hide cart if counter equals 0
+                    $('#cart-counter').html(cartCounter);
+                    if(cartCounter < 1){
+                        cartView.fadeOut();
+                    }
+
+                    //timer
+                    var numSeconds = 3;
+                    var timer = 3;
+                    function countDown(){
+                        numSeconds--;
+                        if(numSeconds == 0){
+                            clearInterval(timer);
+                        }
+                        $('#notificationTimer').html(numSeconds);
+                    }
+                    timer = setInterval(countDown, 1000);
+
+                    //hide notification if user clicked
+                    $('#notifTool').click(function(){
+                        restoreNotification();
+                    });
+
+                    setTimeout(function(){
+                        restoreNotification();
+                    }, numSeconds * 1000);
+                }
+                else{
+                    errorMsg = "<h3>" + data.errors + "</h3>";
+                    outputMsg.append(errorMsg).addClass('warningNotif').slideDown();
+
+                    //timer
+                    var numSeconds = 5;
+                    var timer = 5;
+                    function countDown(){
+                        numSeconds--;
+                        if(numSeconds == 0){
+                            clearInterval(timer);
+                        }
+                        $('#notificationTimer').html(numSeconds);
+                    }
+                    timer = setInterval(countDown, 1000);
+
+                    //hide notification if user clicked
+                    $('#notifTool').click(function(){
+                        restoreNotification();
+                    });
+
+                    setTimeout(function(){
+                        restoreNotification();
+                    }, numSeconds * 1000);
+                }
+            }
+        });
+
+        return false;
+    });
+
+
+    /**
+     *  send mail response to seller with user cart data
+     */
+    $("#cart-form").submit(function(event){
+        event.preventDefault();
+
+        var token = $('#cart-form input[name="_token"]').val();
+        var outputMsg = $('#outputMsg');
+        var errorMsg = "";
+        var successMsg = "<h3>Vaš upit je uspješno poslan.</h3>";
+
+        //get input fields values
+        var userValues = {};
+        $.each($(this).serializeArray(), function (i, field) {
+            userValues[field.name] = field.value;
+        });
+
+        var cartValues = {};
+        var cartDataInputs = $('#cart-data :input');
+        cartDataInputs.each(function() {
+            cartValues[this.name] = $(this).val();
+        });
+
+        var dataURL = $(this).attr('action');
+
+        function restoreNotification(){
+            outputMsg.fadeOut(1000, function(){
+                outputMsg.find('h3').remove();
+                $('#notificationTimer').empty();
+
+                setTimeout(function () {
+                    outputMsg.attr('class', 'notificationOutput');
+                }, 1000);
+            });
+        }
+
+        $.ajax({
+            type: 'post',
+            url: dataURL,
+            dataType: 'json',
+            data: { cartUserData: userValues, cartItemData: cartValues, _token : token },
+            success: function(data){
+
+                //check status of validation and query
+                if(data.status === 'success'){
+                    outputMsg.append(successMsg).addClass('successNotif').slideDown();
+
+                    //timer
+                    var numSeconds = 3;
+                    var timer = 3;
+                    function countDown(){
+                        numSeconds--;
+                        if(numSeconds == 0){
+                            clearInterval(timer);
+                        }
+                        $('#notificationTimer').html(numSeconds);
+                    }
+                    timer = setInterval(countDown, 1000);
+
+                    //hide notification if user clicked
+                    $('#notifTool').click(function(){
+                        restoreNotification();
+                    });
+
+                    setTimeout(function(){
+                        restoreNotification();
+                        location.reload();
+                    }, numSeconds * 1000);
+                }
+                else{
+                    $.each(data.errors, function(index, value) {
+                        $.each(value, function(i){
+                            errorMsg += "<h3>" + value[i] + "</h3>";
+                        });
+                    });
+                    outputMsg.append(errorMsg).addClass('warningNotif').slideDown();
+
+                    //timer
+                    var numSeconds = 5;
+                    var timer = 5;
+                    function countDown(){
+                        numSeconds--;
+                        if(numSeconds == 0){
+                            clearInterval(timer);
+                        }
+                        $('#notificationTimer').html(numSeconds);
+                    }
+                    timer = setInterval(countDown, 1000);
+
+                    //hide notification if user clicked
+                    $('#notifTool').click(function(){
+                        restoreNotification();
+                    });
+
+                    setTimeout(function(){
+                        restoreNotification();
+                    }, numSeconds * 1000);
+                }
+            }
+        });
+
+        return false;
+    });
+
 });
 
 /**

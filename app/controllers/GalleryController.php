@@ -36,7 +36,8 @@ class GalleryController extends BaseController{
         $video_data = Gallery::where('is_image', '=', 'no')->get();
 
         return View::make('public.gallery')->with(['image_data' => $image_data,
-                                                    'video_data' => $video_data
+                                                    'video_data' => $video_data,
+                                                    'page_title' => 'Galerija'
                                                 ]);
     }
 
