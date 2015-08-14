@@ -1,7 +1,12 @@
 @include('publicLayout.header')
 
 <section class="section main-content" id="main">
-    <h1 class="section-header">Portal</h1>
+    <h1 class="section-header">Portal
+        <span class="pull-right">
+            <a href="{{ url('rss') }}" title="4allGym RSS" class="rss"><i class="fa fa-rss fa-big"></i>
+            </a>
+        </span>
+    </h1>
 
     <section id="news_sort" class="section-inner">
         <div class="row text-center" id="person_sort">

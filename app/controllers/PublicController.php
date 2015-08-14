@@ -130,4 +130,34 @@ class PublicController extends BaseController
                                                 ]);
     }
 
+    public function getRss()
+    {
+        //generate feed and cache for 60 min
+        $feed = Feed::make();
+        $feed->setCache(60, '4allGymRssKey');
+
+        //check if there is cached version
+        if(!$feed->isCached()){
+            //grab news data from database
+            $news_data = News::orderBy('id', 'DESC')->take(5)->get();
+
+            //set feed parameters
+            $feed->title = '4allGym RSS';
+            $feed->description = 'Najnovije vijesti na 4allGym portalu';
+            $feed->logo = URL::to('css/assets/images/logo_nav.png');
+            $feed->link = URL::to('rss');
+            $feed->setDateFormat('datetime');
+            $feed->pubdate = $news_data[0]->created_at;
+            $feed->lang = 'hr';
+            $feed->setShortening(true);
+            $feed->setTextLimit(500);
+
+            foreach($news_data as $news){
+                $feed->add($news->news_title, $news->author->username, URL::to('portal/pregled/'.$news->slug), $news->created_at, (new BBCParser)->unparse($news->news_body), '');
+            }
+        }
+
+        return $feed->render('atom');
+    }
+
 }
