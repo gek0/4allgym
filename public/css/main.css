@@ -1061,6 +1061,35 @@ div.thumbnail{
     font-size: 1.25em;
 }
 
+.img-center img{
+    margin: 0 auto;
+}
+
+blockquote {
+    background: rgba(255, 255, 255, .05);
+    border-left: 10px solid rgba(251, 209, 97, 0.75);
+    margin: 1.5em auto;
+    padding: 0.5em 2em;
+    quotes: "\201C""\201D""\2018""\2019";
+}
+blockquote:before {
+    color: rgba(251, 209, 97, 0.75);
+    content: open-quote;
+    font-size: 4em;
+    line-height: 0.1em;
+    margin-right: 0.25em;
+    vertical-align: -0.4em;
+}
+
+.block-header{ color: #C8A854; }
+h2.block-header{
+    font-size: 3.25em;
+}
+h3.block-header{
+    text-transform: uppercase;
+    font-size: 2.25em;
+}
+
 .small-marg { margin: .5em 0; }
 
 .medium-marg { margin: 1em 0; }

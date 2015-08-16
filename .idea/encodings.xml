@@ -33,6 +33,7 @@
     <file url="file://$PROJECT_DIR$/app/views/public/index.blade.php" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/app/views/public/kontakt.blade.php" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/app/views/public/login.blade.php" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/app/views/public/onama.blade.php" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/app/views/public/portal/pregled.blade.php" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/app/views/public/shop/cart-email.blade.php" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/app/views/public/shop/category.blade.php" charset="UTF-8" />

@@ -67,7 +67,7 @@
                     {{ HTML::smartRoute_link('portal', 'Portal', '<i class="fa fa-newspaper-o"></i>') }}
                     {{ HTML::smartRoute_link('shop', 'Ponuda', '<i class="fa fa-shopping-cart"></i>') }}
                     {{ HTML::smartRoute_link('galerija', 'Galerija', '<i class="fa fa-picture-o"></i>') }}
-                    {{ HTML::smartRoute_link('caffe-bar', 'Caffe bar', '<i class="fa fa-coffee"></i>') }}
+                    {{ HTML::smartRoute_link('caffe-bar', '4allBar', '<i class="fa fa-coffee"></i>') }}
                     {{ HTML::smartRoute_link('cage-football', 'Cage football', '<i class="fa fa-futbol-o"></i>') }}
                     {{ HTML::smartRoute_link('o-nama', 'O nama', '<i class="fa fa-info"></i>') }}
                     {{ HTML::smartRoute_link('kontakt', 'Kontakt', '<i class="fa fa-envelope"></i>') }}
