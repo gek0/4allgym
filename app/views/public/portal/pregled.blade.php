@@ -52,6 +52,9 @@
                                     <i class="fa fa-eye fa-med pr-10"></i>
                                     {{ $news_data->num_visited }} pregleda
                                 </li>
+                                <li class="list-group-item text-center">
+                                    <div class="addthis_sharing_toolbox"></div>
+                                </li>
                             </ul>
                         </div>
                     </div> <!-- end info -->
@@ -132,5 +135,7 @@
 
 {{-- include session notification output --}}
 @include('admin.notification')
+
+<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-55d08c929829c549" async="async"></script>
 
 @include('publicLayout.footer')
