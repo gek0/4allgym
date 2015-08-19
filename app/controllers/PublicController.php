@@ -137,23 +137,29 @@ class PublicController extends BaseController
         $feed->setCache(60, '4allGymRssKey');
 
         //check if there is cached version
-        if(!$feed->isCached()){
+        if(!$feed->isCached()) {
             //grab news data from database
             $news_data = News::orderBy('id', 'DESC')->take(5)->get();
 
-            //set feed parameters
-            $feed->title = '4allGym RSS';
-            $feed->description = 'Najnovije vijesti na 4allGym portalu';
-            $feed->logo = URL::to('css/assets/images/logo_nav.png');
-            $feed->link = URL::to('rss');
-            $feed->setDateFormat('datetime');
-            $feed->pubdate = $news_data[0]->created_at;
-            $feed->lang = 'hr';
-            $feed->setShortening(true);
-            $feed->setTextLimit(500);
+            //check if there are news
+            if ($news_data == true) {
+                //set feed parameters
+                $feed->title = '4allGym RSS';
+                $feed->description = 'Najnovije vijesti na 4allGym portalu';
+                $feed->logo = URL::to('css/assets/images/logo_nav.png');
+                $feed->link = URL::to('rss');
+                $feed->setDateFormat('datetime');
+                $feed->pubdate = $news_data[0]->created_at;
+                $feed->lang = 'hr';
+                $feed->setShortening(true);
+                $feed->setTextLimit(500);
 
-            foreach($news_data as $news){
-                $feed->add($news->news_title, $news->author->username, URL::to('portal/pregled/'.$news->slug), $news->created_at, (new BBCParser)->unparse($news->news_body), '');
+                foreach ($news_data as $news) {
+                    $feed->add($news->news_title, $news->author->username, URL::to('portal/pregled/' . $news->slug), $news->created_at, (new BBCParser)->unparse($news->news_body), '');
+                }
+            }
+            else{
+                return Redirect::to('portal')->withErrors('Trenutno nema vijesti. RSS je isključen.');
             }
         }
 

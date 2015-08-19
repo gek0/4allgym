@@ -9,6 +9,7 @@
             <h3>O košarici</h3>
             <p class="contact-detail">Ako imate upit za više proizvoda koje nudimo, dodajte ih u košaricu kako bi se sve zajedno poslalo u jednom upitu prodavaču. Iz košarice se može naknadno brisati.</p>
             <p class="contact-detail">Ispunite i polja sa svojim osobnim podacima kako bi mogli dobiti odgovor u što kraćem roku.</p>
+            <p class="contact-detail">Proizvodi se zaprimaju i plaćaju u prostorijama 4allGym-a.</p>
         </div>
 
         <section id="cart-data-content">
