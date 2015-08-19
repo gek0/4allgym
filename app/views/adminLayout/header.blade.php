@@ -18,7 +18,7 @@
     <meta property="og:type" content="website" />
     <meta property="og:url" content="{{ Request::url('/') }}" />
     <meta property="og:site_name" content="4allgym.hr" />
-    <meta property="og:description" content="4allGym - kondicijski centar" />
+    <meta property="og:description" content="4allGym - kondicijsko pripremni centar" />
 
     <!-- favicons and apple icon -->
     <!--[if IE]><link rel="shortcut icon" href="{{ asset('favicon.ico') }}"><![endif]-->

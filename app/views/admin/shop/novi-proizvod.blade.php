@@ -18,7 +18,7 @@
                     <div class="form-group">
                         {{ Form::label('product_category', 'Kategorija proizvoda:') }}<br>
                         {{ Form::select('product_category', ['Izaberi kategoriju proizvoda...' => $product_categories],
-                                                  null, ['class' => 'selectpicker show-tick', 'data-style' => 'btn-submit btn-padded-smaller', 'data-live-search' => 'true', 'title' => 'Odaberi kategoriju proizvoda...', 'data-size' => '5'])
+                                                  null, ['class' => 'selectpicker show-tick', 'data-style' => 'btn-submit btn-padded-smaller', 'data-live-search' => 'true', 'title' => 'Odaberi kategoriju proizvoda...', 'data-size' => '5', 'required'])
                         }}
                     </div>
                 </div>

@@ -6,17 +6,17 @@
 <!--[if (gt IE 9)|!(IE)]><!--> <html lang="hr" class="no-js"> <!--<![endif]-->
 <head>
     <meta charset="utf-8">
-    <title>4AllGym :: {{ $page_title or 'kondicijski centar' }}</title>
+    <title>4AllGym :: {{ $page_title or 'kondicijsko pripremni centar' }}</title>
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="keywords" content="4allGym, kondicijska, pripreme, centar, gym, teretana, mma, zagreb">
-    <meta name="description" content="4allGym - kondicijski centar">
+    <meta name="description" content="4allGym - kondicijsko pripremni centar">
     <meta name="author" content="Matija Buriša">
     <meta property="og:title" content="4allGym" />
     <meta property="og:type" content="website" />
     <meta property="og:url" content="{{ Request::url('/') }}" />
     <meta property="og:site_name" content="4allgym.hr" />
-    <meta property="og:description" content="4allGym - kondicijski centar" />
+    <meta property="og:description" content="4allGym - kondicijsko pripremni centar" />
 
     <!-- favicons and apple icon -->
     <!--[if IE]><link rel="shortcut icon" href="{{ asset('favicon.ico') }}"><![endif]-->
