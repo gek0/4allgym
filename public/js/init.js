@@ -30,6 +30,20 @@ jQuery(document).ready(function(){
     }
 
     /**
+     *   social networks
+     */
+    $("#social_aside").hide();
+    $(function() {
+        $(window).scroll(function() {
+            if ($(this).scrollTop() > 300) {
+                $("#social_aside").fadeIn();
+            } else {
+                $("#social_aside").fadeOut();
+            }
+        });
+    });
+
+    /**
      *   scroll to top
      */
     var offset = 300,

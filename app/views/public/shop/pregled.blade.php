@@ -49,7 +49,7 @@
         </div>  <!-- end well -->
 
         <div class="space"></div>
-        <a href="{{ URL::previous() }}"><button class="btn btn-submit"><i class="fa fa-chevron-left"></i> Povratak u 4allGym shop</button></a>
+        <a href="{{ URL::to('shop') }}"><button class="btn btn-submit"><i class="fa fa-chevron-left"></i> Povratak u 4allGym shop</button></a>
 
     </section>  <!-- end section-inner -->
 

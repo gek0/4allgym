@@ -156,10 +156,15 @@ thead{ font-weight: bold; }
 footer{
     background: rgba(47, 47, 47, 1);
     padding: 1em 0;
-    width: 100%; height: 65px;
+    width: 100%; height: auto;
     text-align: center;
     margin: 1em auto 0 auto;
     box-shadow: 0 1px 2px rgba(0, 0, 0, .1); -webkit-box-shadow: 0 1px 2px rgba(0, 0, 0, .1); -o-box-shadow: 0 1px 2px rgba(0, 0, 0, .1);
+}
+
+.foot-link i:hover,
+.foot-link i:focus{
+    color: #fff;
 }
 
 /**
@@ -1456,6 +1461,7 @@ h3.block-header{
     }
 }
 
+
 /**
 *   media query for RWD
 */
@@ -1474,6 +1480,29 @@ h3.block-header{
 @media all and (min-width: 1280px) {
 
     img.thumbnail { height: 250px; }
+
+    /**
+    *   social networks
+    */
+    #social_aside {
+        border: none;
+        width: 48px;
+        opacity: .6;
+        height: 96px;
+        position: fixed;
+        top: 200px;
+        z-index: 9999;
+        -webkit-transition: all .2s ease-in-out;
+        -moz-transition: all .2s ease-in-out;
+        -o-transition: all .2s ease-in-out;
+        -ms-transition: all .2s ease-in-out;
+        transition: all .2s ease-in-out
+    }
+
+    #social_aside:focus,
+    #social_aside:hover {
+        opacity: 1
+    }
 }
 
 @media all and (min-width: 1024px) and (max-width: 1280px) {

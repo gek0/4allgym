@@ -49,6 +49,13 @@
     </div>
 </div>
 
+<!-- social networks -->
+<div id="social_aside">
+    <a href="https://www.facebook.com/4allGym" target="_blank">
+        {{ HTML::image('css/assets/images/social/facebook.png', '4allGym - Facebook', ['class' => 'img-responsive lazy', 'title' => '4allGym - Facebook']) }}
+    </a>
+</div>
+
 <div id="outer-wrap">
     <div id="inner-wrap">
 
