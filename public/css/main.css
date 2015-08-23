@@ -944,6 +944,13 @@ textarea.form-input-control{
 /**
 *   misc
 */
+
+span.size1{ font-size: 10px; }
+span.size2{ font-size: 12px; }
+span.size3{ font-size: 14px; }
+span.size4{ font-size: 16px; }
+span.size5{ font-size: 18px; }
+
 .page-header{ border: none; }
 
 .btn-padded{

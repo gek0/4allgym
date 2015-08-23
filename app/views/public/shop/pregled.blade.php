@@ -20,8 +20,9 @@
                 </div>
                 <div class="col-md-7">
                     <div class="media-body">
-                        <h3 class="media-heading">{{ $product_data->product_name }}</h3>
-                        <p>{{ $product_data->product_description }}</p>
+                        <h3 class="media-heading">{{ $product_data->product_name }}</h3><br>
+
+                        <p>{{ removeEmptyP(nl2p((new BBCParser)->parse($product_data->product_description))) }}</p>
                         <div class="space"></div>
 
                         <p><strong>Kategorija:</strong> <a href="{{ URL::to('shop/'.$product_data->category->slug) }}">{{ $product_data->category->category_name }}</a></p>

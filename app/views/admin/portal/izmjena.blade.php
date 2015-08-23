@@ -76,6 +76,17 @@
             $('#news_tags').tagsinput('add', tagsData[i]);
         }
     });
+
+    jQuery(window).load(function() {
+        /*
+         *   BBCode editor returning blank text on refresh, FF bug
+         */
+        var editor = $("#codeEditor");
+        var editorLength = editor.val().length;
+        if(editorLength < 1){
+            editor.sync();
+        }
+    });
 </script>
 
 @include('adminLayout.footer')

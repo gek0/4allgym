@@ -49,7 +49,7 @@ jQuery(document).ready(function(){
     */
     var lg = {
         lang: "hr",
-        buttons: "bold,italic,underline,strike,sup,sub,|,justifyleft,justifycenter,justifyright,|,table,bullist,numlist,fontcolor,|,link,video,removeFormat"
+        buttons: "bold,italic,underline,strike,sup,sub,|,justifyleft,justifycenter,justifyright,fontSize,quote,|,table,bullist,numlist,fontcolor,code,|,link,video,removeFormat"
     }
     $("#codeEditor").wysibb(lg);
 

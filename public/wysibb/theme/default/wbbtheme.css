@@ -102,6 +102,8 @@
   height:26px;
   min-width:26px;
   margin:2px;
+  background: rgba(251, 209, 97, 1);
+  color: #000;
 }
 .wysibb .wysibb-toolbar .wysibb-toolbar-container .wysibb-toolbar-btn span.btn-tooltip {
   display:none;
@@ -371,6 +373,8 @@
   text-overflow: ellipsis;
   white-space: nowrap;
   margin-right:10px;
+  background-color: rgba(251, 209, 97, 1);
+  color: black;
 }
 .wbb-select .option{
   display:block;
@@ -744,10 +748,10 @@
 	  position:absolute;
 	  top:32px;
 	  left:-1px;
-	  border: 1px solid #bbb;
+	  border: 1px solid #C8A854;
 	  box-shadow: 0px 0px 3px #aaa;
 	  width:190px;
-	  background:#fff;
+	  background:#000;
 	  max-height:220px;
 	  overflow:auto;
 	  z-index:1000;
