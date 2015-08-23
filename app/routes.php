@@ -111,7 +111,7 @@ Route::get('o-nama', ['as' => 'o-nama', 'uses' => 'PublicController@showAboutUs'
 
 Route::get('rss', ['as' => 'rss', 'uses' => 'PublicController@getRss']);
 
-//Route::get('/', ['as' => 'home', 'uses' => 'PublicController@showHome']);
+Route::get('pocetna', ['as' => 'home', 'uses' => 'PublicController@showHome']);
 Route::get('/', function(){
 	return Redirect::to('portal');
 });

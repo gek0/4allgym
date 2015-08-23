@@ -8,36 +8,6 @@
         </span>
     </h1>
 
-    <div class="text-center">
-        <span id="news_sort_cog"><i class="fa fa-cogs fa-gig fa-cur" title="Prikaži dodatne opcije"></i></span>
-    </div>
-    <section id="news_sort_options" class="section-inner">
-        <div class="row text-center" id="person_sort">
-            <div class="col-md-12">
-                <a href="{{ url('tagovi') }}"><button class="btn btn-submit"><i class="fa fa-tags fa-med pr-10"></i> Lista svih tagova</button></a>
-            </div>
-            <div class="space"></div>
-            <div class="formSort padded">
-                {{ Form::open(['url' => 'portal/sort', 'method' => 'GET', 'id' => 'formSort', 'role' => 'form']) }}
-                <div class="col-md-6">
-                    <div class="form-group">
-                        {{ Form::label('sort_option', 'Sortiranje vijesti:') }}<br>
-                        {{ Form::select('sort_option', ['Vrsta sortiranja...' => $sort_data],
-                                          $sort_category, ['class' => 'selectpicker show-tick', 'data-style' => 'btn-submit', 'title' => 'Vrsta sortiranja...', 'data-size' => '5'])
-                        }}
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="form-group">
-                        {{ Form::label('news_text_sort', 'Pretraga po tekstu vijesti:') }}
-                        {{ Form::text('news_text_sort', $news_text_sort, ['id' => 'news_text', 'class' => 'form-input-control', 'placeholder' => 'Tekst vijesti...']) }}
-                    </div>
-                </div>
-                {{ Form::close() }}
-            </div>
-        </div>
-    </section> <!-- end news_sort section -->
-
     @if(count($news_data->all()) > 0)
             @foreach(array_chunk($news_data->all(), 3) as $news)
                 <div class="row padded marginated-center">
@@ -70,6 +40,34 @@
             <div class="pagination-layout pagination-centered">
                 {{ $news_data->appends(Request::except('stranica'))->links() }}
             </div> <!-- end pagination -->
+
+                <div class="space"></div>
+                <section id="news_sort" class="section-inner">
+                    <div class="row text-center" id="person_sort">
+                        <div class="col-md-12">
+                            <a href="{{ url('tagovi') }}"><button class="btn btn-submit"><i class="fa fa-tags fa-med pr-10"></i> Lista svih tagova</button></a>
+                        </div>
+                        <div class="space"></div>
+                        <div class="formSort padded">
+                            {{ Form::open(['url' => 'portal/sort', 'method' => 'GET', 'id' => 'formSort', 'role' => 'form']) }}
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    {{ Form::label('sort_option', 'Sortiranje vijesti:') }}<br>
+                                    {{ Form::select('sort_option', ['Vrsta sortiranja...' => $sort_data],
+                                                      $sort_category, ['class' => 'selectpicker show-tick', 'data-style' => 'btn-submit', 'title' => 'Vrsta sortiranja...', 'data-size' => '5'])
+                                    }}
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    {{ Form::label('news_text_sort', 'Pretraga po tekstu vijesti:') }}
+                                    {{ Form::text('news_text_sort', $news_text_sort, ['id' => 'news_text', 'class' => 'form-input-control', 'placeholder' => 'Tekst vijesti...']) }}
+                                </div>
+                            </div>
+                            {{ Form::close() }}
+                        </div>
+                    </div>
+                </section> <!-- end news_sort section -->
         @else
             <div class="text-center">
                 <h2>Trenutno nema vijesti.</h2>
@@ -80,13 +78,5 @@
 
 {{-- include session notification output --}}
 @include('admin.notification')
-
-<script>
-    jQuery(document).ready(function(){
-        $("#news_sort_cog").click(function(){
-           $("#news_sort_options").toggle(500);
-        });
-    });
-</script>
 
 @include('publicLayout.footer')
