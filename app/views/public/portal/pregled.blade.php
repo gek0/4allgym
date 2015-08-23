@@ -1,5 +1,14 @@
 @include('publicLayout.header')
 
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) return;
+        js = d.createElement(s); js.id = id;
+        js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.4";
+        fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));</script>
+
 <section class="section main-content" id="main">
     <h3 class="section-header">Portal <i class="fa fa-angle-right"></i> Vijest <i class="fa fa-angle-right"></i> {{ $news_data->news_title }}</h3>
 
@@ -7,6 +16,18 @@
         <article class="data_individual">
             <div class="page-header">
                 <h1>{{ $news_data->news_title }}</h1>
+                <div class="small sm-wid">
+                    <div class="row">
+                        <div class="col-md-6" title="Datum objave">
+                            <i class="fa fa-calendar fa-med pr-10"></i>
+                            <time datetime="{{ $news_data->getDateCreatedFormatedHTML() }}">{{ $news_data->getDateCreatedFormated() }}</time>
+                        </div>
+                        <div class="col-md-6" title="Broj pregleda">
+                            <i class="fa fa-eye fa-med pr-10"></i>
+                            {{ $news_data->num_visited }} pregleda
+                        </div>
+                    </div>
+                </div>
             </div>
             
             <div class="row padded">
@@ -20,44 +41,33 @@
 
                     <div class="row">
                         <div class="col-md-12">
-                            <i class="fa fa-tags fa-big" title="Tagovi članka"></i> <span class="info-text">Tagovi članka</span>
-                            @if($news_data->tags->count() > 0)
-                                <ul class="tags">
-                                    @foreach($news_data->tags as $tag)
-                                        <a href="{{ URL::to('portal/tag/'.$tag->slug) }}"><li>{{ $tag->tag }}</li></a>
-                                    @endforeach
-                                </ul>
-                            @else
-                                <p>Trenutno nema tagova.</p>
-                            @endif
+                            <div class="addthis_sharing_toolbox"></div>
                         </div>
                     </div>
 
                     <div class="space"></div>
 
                     {{ removeEmptyP(nl2p((new BBCParser)->parse($news_data->news_body))) }}
+
+                    <div class="fb-comments" data-href="https://www.facebook.com/4allGym" data-width="750" data-numposts="5" data-colorscheme="dark" data-version="v2.3"></div>
                 </div>
                 <div class="col-md-3">
-                    <div class="sidebar-content">
-                        <div class="sidebar-header text-center">
-                            <i class="fa fa-info fa-big" title="Info"></i> <span class="info-text">Info</span>
-                        </div>
-                        <div class="sidebar-body">
-                            <ul class="list-group">
-                                <li class="list-group-item">
-                                    <i class="fa fa-calendar fa-med pr-10"></i>
-                                    <time datetime="{{ $news_data->getDateCreatedFormatedHTML() }}">{{ $news_data->getDateCreatedFormated() }}</time>
-                                </li>
-                                <li class="list-group-item">
-                                    <i class="fa fa-eye fa-med pr-10"></i>
-                                    {{ $news_data->num_visited }} pregleda
-                                </li>
-                                <li class="list-group-item text-center">
-                                    <div class="addthis_sharing_toolbox"></div>
-                                </li>
-                            </ul>
-                        </div>
-                    </div> <!-- end info -->
+                    @if($news_data->tags->count() > 0)
+                        <div class="sidebar-content">
+                            <div class="sidebar-header text-center">
+                                <i class="fa fa-tags fa-big" title="Tagovi članka"></i> <span class="info-text">Tagovi članka</span>
+                            </div>
+                            <div class="sidebar-body">
+                                <ul class="list-group">
+                                    <ul class="tags">
+                                        @foreach($news_data->tags as $tag)
+                                            <a href="{{ URL::to('portal/tag/'.$tag->slug) }}"><li>{{ $tag->tag }}</li></a>
+                                        @endforeach
+                                    </ul>
+                                </ul>
+                            </div>
+                        </div> <!-- end info -->
+                    @endif
 
                     <div class="sidebar-content">
                         <div class="sidebar-header text-center">

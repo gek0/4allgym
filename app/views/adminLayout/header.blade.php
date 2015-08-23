@@ -71,7 +71,7 @@
                 <ul>
                     {{ HTML::smartRoute_link('admin/pocetna', 'Početna', '<i class="fa fa-home"></i>') }}
                     {{ HTML::smartRoute_link('admin/portal', 'Portal', '<i class="fa fa-newspaper-o"></i>') }}
-                    {{ HTML::smartRoute_link('admin/shop', 'Ponuda', '<i class="fa fa-shopping-cart"></i>') }}
+                    {{ HTML::smartRoute_link('admin/shop', 'Web Shop', '<i class="fa fa-shopping-cart"></i>') }}
                     {{ HTML::smartRoute_link('admin/galerija', 'Galerija', '<i class="fa fa-picture-o"></i>') }}
                     {{ HTML::smartRoute_link('admin/caffe-bar', '4allBar', '<i class="fa fa-coffee"></i>') }}
                     {{ HTML::smartRoute_link('admin/cage-football', 'Cage football', '<i class="fa fa-futbol-o"></i>') }}
