@@ -70,7 +70,7 @@
             <div class="block">
                 <h2 class="block-title">Navigacija</h2>
                 <ul>
-                    {{ HTML::smartRoute_link('/', 'Početna', '<i class="fa fa-home"></i>') }}
+                    {{-- HTML::smartRoute_link('/', 'Početna', '<i class="fa fa-home"></i>') --}}
                     {{ HTML::smartRoute_link('portal', 'Portal', '<i class="fa fa-newspaper-o"></i>') }}
                     {{ HTML::smartRoute_link('shop', 'Ponuda', '<i class="fa fa-shopping-cart"></i>') }}
                     {{ HTML::smartRoute_link('galerija', 'Galerija', '<i class="fa fa-picture-o"></i>') }}

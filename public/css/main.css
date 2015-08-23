@@ -127,6 +127,8 @@ a:visited, a:hover, a:active{
 
 .fa-med { font-size: 1.15em; }
 
+.fa-cur{ cursor: pointer; }
+
 .js-active-link { cursor: pointer; }
 
 .marginated{ margin: .625em; }
@@ -165,6 +167,10 @@ footer{
 .foot-link i:hover,
 .foot-link i:focus{
     color: #fff;
+}
+
+#news_sort_options{
+    display: none;
 }
 
 /**

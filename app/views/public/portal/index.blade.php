@@ -8,7 +8,10 @@
         </span>
     </h1>
 
-    <section id="news_sort" class="section-inner">
+    <div class="text-center">
+        <span id="news_sort_cog"><i class="fa fa-cogs fa-gig fa-cur" title="Prikaži dodatne opcije"></i></span>
+    </div>
+    <section id="news_sort_options" class="section-inner">
         <div class="row text-center" id="person_sort">
             <div class="col-md-12">
                 <a href="{{ url('tagovi') }}"><button class="btn btn-submit"><i class="fa fa-tags fa-med pr-10"></i> Lista svih tagova</button></a>
@@ -34,7 +37,6 @@
             </div>
         </div>
     </section> <!-- end news_sort section -->
-    <div class="space"></div>
 
     @if(count($news_data->all()) > 0)
             @foreach(array_chunk($news_data->all(), 3) as $news)
@@ -78,5 +80,13 @@
 
 {{-- include session notification output --}}
 @include('admin.notification')
+
+<script>
+    jQuery(document).ready(function(){
+        $("#news_sort_cog").click(function(){
+           $("#news_sort_options").toggle(500);
+        });
+    });
+</script>
 
 @include('publicLayout.footer')
