@@ -25,6 +25,11 @@
             </blockquote>
         </article>
 
+        <div class="text-center img-center">
+            <h2>Ponosni sponzor 4allGyma</h2>
+            {{ HTML::image('css/assets/images/sponsors/multipower_sponsor_logo.png', 'Sponzor 4allGyma - Multipower', ['class' => 'lazy img-responsive', 'title' => 'Sponzor 4allGyma - Multipower']) }}
+        </div>
+
     </section> <!-- end section -->
 </section> <!-- end main-content -->
 

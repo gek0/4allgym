@@ -60,10 +60,12 @@
     <div id="inner-wrap">
 
         <header id="top" role="banner">
+            <div class="sponsor-pull-left" title="Multipower"></div>
             <div class="block">
                 <div id="nav-logo" title="4allGym"></div>
                 <a class="nav-btn" id="nav-open-btn" href="#nav"><i class="fa fa-bars" title="Prikaži navigaciju"></i></a>
             </div>
+            <div class="sponsor-pull-right" title="Multipower"></div>
         </header>
 
         <nav id="nav" role="navigation">

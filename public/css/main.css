@@ -222,9 +222,7 @@ footer{
     background-color: rgba(0, 0, 0, .2);
 }
 
-/**
-*   tabs
-*/
+
 /**
 *   tabs
 */
@@ -431,6 +429,10 @@ footer{
     color: #fff;
     background: rgba(251, 209, 97, .5);
 }
+
+/**
+*   header
+*/
 
 #top {
     z-index: 100;
@@ -1538,8 +1540,33 @@ h3.block-header{
 
 }
 
-@media all and (min-width: 480px) and (max-width: 768px) {
+@media all and (min-width: 615px) and (max-width: 991px) {
+    /**
+    *   header sponsors
+    */
+    .sponsor-pull-left,
+    .sponsor-pull-right {
+        border: none;
+        -webkit-border-radius: 10px;
+        -moz-border-radius: 10px;
+        border-radius: 10px;
+        position: absolute;
+        z-index: 100;
+        top: 100px;
+    }
+    .sponsor-pull-left {
+        width: 75px;
+        height: 75px;
+        left: 2em;
+        background: url('assets/images/sponsors/multipower_sponsor_logo_small.png') no-repeat;
+    }
 
+    .sponsor-pull-right {
+        width: 75px;
+        height: 75px;
+        right: 2em;
+        background: url('assets/images/sponsors/multipower2_sponsor_logo_small.png') no-repeat center;
+    }
 }
 
 @media all and (max-width: 480px) {
@@ -1554,6 +1581,37 @@ h3.block-header{
         border-left: none;
     }
 
+}
+
+@media all and (min-width: 991px) {
+    /**
+    *   header sponsors
+    */
+    .sponsor-pull-left,
+    .sponsor-pull-right {
+        border: none;
+        -webkit-border-radius: 10px;
+        -moz-border-radius: 10px;
+        border-radius: 10px;
+        position: absolute;
+        z-index: 100;
+    }
+
+    .sponsor-pull-left {
+        width: 250px;
+        height: 140px;
+        left: 2em;
+        top: 25px;
+        background: url('assets/images/sponsors/multipower_sponsor_logo.png') no-repeat;
+    }
+
+    .sponsor-pull-right {
+        width: 175px;
+        height: 175px;
+        right: 2em;
+        top: 25px;
+        background: url('assets/images/sponsors/multipower2_sponsor_logo.png') no-repeat center;
+    }
 }
 
 /* Portrait */
