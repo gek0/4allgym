@@ -6,13 +6,16 @@
     <section class="section-inner">
 
         <div class="row text-center">
-            <div class="col-md-4 padded">
+            <div class="col-md-3 padded">
                 <a href="{{ URL::route('admin-portal') }}"><button class="btn btn-submit btn-padded"><i class="fa fa-newspaper-o"></i> Portal</button></a>
             </div>
-            <div class="col-md-4 padded">
+            <div class="col-md-3 padded">
                 <a href="{{ URL::route('admin-shop') }}"><button class="btn btn-submit btn-padded"><i class="fa fa-shopping-cart"></i> Web Shop</button></a>
             </div>
-            <div class="col-md-4 padded">
+            <div class="col-md-3 padded">
+                <a href="{{ URL::route('admin-offer') }}"><button class="btn btn-submit btn-padded"><i class="fa fa-shopping-cart"></i> Ponuda</button></a>
+            </div>
+            <div class="col-md-3 padded">
                 <a href="{{ URL::route('admin-gallery') }}"><button class="btn btn-submit btn-padded"><i class="fa fa-picture-o"></i> Galerija</button></a>
             </div>
             <div class="col-md-4 padded">

@@ -44,7 +44,7 @@ class ProductController extends BaseController
         return View::make('public.shop.index')->with(['products_data' => $products_data,
                                                         'product_categories' => $product_categories,
                                                         'search_param' => null,
-                                                        'page_title' => 'Shop'
+                                                        'page_title' => 'Web Shop'
                                                      ]);
     }
 
@@ -66,7 +66,7 @@ class ProductController extends BaseController
                                                                 'category_name' => $category_data->category_name,
                                                                 'slug' => $category_data->slug,
                                                                 'search_param' => null,
-                                                                'page_title' => 'Shop'
+                                                                'page_title' => 'Web Shop'
                                                             ]);
         }
         else{
@@ -98,7 +98,7 @@ class ProductController extends BaseController
                                                                 'category_name' => $category_data->category_name,
                                                                 'slug' => $category_data->slug,
                                                                 'search_param' => $product_name,
-                                                                'page_title' => 'Shop'
+                                                                'page_title' => 'Web Shop'
                                                             ]);
         }
         else{
@@ -126,7 +126,7 @@ class ProductController extends BaseController
         return View::make('public.shop.index')->with(['products_data' => $products_data,
                                                             'product_categories' => $product_categories,
                                                             'search_param' => $product_name,
-                                                            'page_title' => 'Shop'
+                                                            'page_title' => 'Web Shop'
                                                         ]);
 
     }

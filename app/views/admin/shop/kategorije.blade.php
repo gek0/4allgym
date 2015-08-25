@@ -1,7 +1,7 @@
 @include('adminLayout.header')
 
 <section class="section main-content" id="main">
-    <h3 class="section-header">Administracija <i class="fa fa-angle-right"></i> Ponuda <i class="fa fa-angle-right"></i> Kategorije</h3>
+    <h3 class="section-header">Administracija <i class="fa fa-angle-right"></i> Web Shop <i class="fa fa-angle-right"></i> Kategorije</h3>
 
     <section class="section-inner">
         <section class="section form-section">

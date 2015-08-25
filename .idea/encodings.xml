@@ -5,6 +5,7 @@
     <file url="file://$PROJECT_DIR$/app/controllers/GalleryController.php" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/app/controllers/LoginController.php" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/app/controllers/NewsController.php" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/app/controllers/OfferController.php" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/app/controllers/PagesController.php" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/app/controllers/ProductController.php" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/app/controllers/PublicController.php" charset="UTF-8" />
@@ -21,6 +22,10 @@
     <file url="file://$PROJECT_DIR$/app/views/admin/gallery.blade.php" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/app/views/admin/index.blade.php" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/app/views/admin/notification.blade.php" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/app/views/admin/ponuda/index.blade.php" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/app/views/admin/ponuda/izmjena.blade.php" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/app/views/admin/ponuda/nova.blade.php" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/app/views/admin/ponuda/pregled.blade.php" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/app/views/admin/portal/index.blade.php" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/app/views/admin/portal/izmjena.blade.php" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/app/views/admin/portal/nova.blade.php" charset="UTF-8" />

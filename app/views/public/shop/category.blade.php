@@ -1,7 +1,7 @@
 @include('publicLayout.header')
 
 <section class="section main-content" id="main">
-    <h2 class="section-header">Ponuda <i class="fa fa-angle-right"></i> {{ $category_name }}</h2>
+    <h2 class="section-header">Web Shop <i class="fa fa-angle-right"></i> {{ $category_name }}</h2>
 
     <section class="section-inner">
 

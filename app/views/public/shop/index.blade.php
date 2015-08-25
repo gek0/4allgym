@@ -1,7 +1,7 @@
 @include('publicLayout.header')
 
 <section class="section main-content" id="main">
-    <h1 class="section-header">Ponuda</h1>
+    <h1 class="section-header">Web Shop</h1>
 
     <section class="section-inner">
 

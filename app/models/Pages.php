@@ -38,4 +38,12 @@ class Pages extends Eloquent{
      */
     protected $table = 'pages';
 
+    /**
+     * define relationships
+     */
+    public function images()
+    {
+        return $this->hasMany('PagesImage', 'page_id');
+    }
+
 }

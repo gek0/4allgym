@@ -25,7 +25,7 @@ class NewsController extends BaseController
     public function showNewsPortalAdmin()
     {
         //get news
-        $news_data = News::orderBy('id', 'DESC')->paginate(9);
+        $news_data = News::orderBy('id', 'DESC')->paginate($this->news_paginate);
 
         return View::make('admin.portal.index')->with(['news_data' => $news_data]);
     }

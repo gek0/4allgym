@@ -44,6 +44,16 @@ Route::group(['before' => 'auth'], function() {
 	Route::post('admin/portal/izmjena/{slug}', ['as' => 'admin-portal-editPost', 'uses' => 'NewsController@updateNews'])->where(['slug' => '[\w\-šđčćžŠĐČĆŽ]+']);
 	Route::get('admin/portal/brisanje/{slug}', ['as' => 'admin-portal-delete', 'uses' => 'NewsController@deleteNews'])->where(['slug' => '[\w\-šđčćžŠĐČĆŽ]+']);
 
+	//offers
+	Route::get('admin/ponuda', ['as' => 'admin-offer', 'uses' => 'OfferController@showOfferIndexAdmin']);
+	Route::post('admin/ponuda/gallery-image-delete', ['as' => 'admin-offer-gallery-image-delete', 'uses' => 'OfferController@deleteOfferGalleryImage']);
+	Route::get('admin/ponuda/dodaj', ['as' => 'admin-offer-add', 'uses' => 'OfferController@showNewOfferForm']);
+	Route::post('admin/ponuda/dodaj', ['as' => 'admin-offer-addPost', 'uses' => 'OfferController@addNewOffer']);
+	Route::get('admin/ponuda/pregled/{slug}', ['as' => 'admin-offer-show', 'uses' => 'OfferController@showOfferAdmin'])->where(['slug' => '[\w\-šđčćžŠĐČĆŽ]+']);
+	Route::get('admin/ponuda/izmjena/{slug}', ['as' => 'admin-offer-edit', 'uses' => 'OfferController@showOfferEditForm'])->where(['slug' => '[\w\-šđčćžŠĐČĆŽ]+']);
+	Route::post('admin/ponuda/izmjena/{slug}', ['as' => 'admin-offer-editPost', 'uses' => 'OfferController@updateOffer'])->where(['slug' => '[\w\-šđčćžŠĐČĆŽ]+']);
+	Route::get('admin/ponuda/brisanje/{slug}', ['as' => 'admin-offer-delete', 'uses' => 'OfferController@deleteOffer'])->where(['slug' => '[\w\-šđčćžŠĐČĆŽ]+']);
+
 	//gallery
 	Route::get('admin/galerija', ['as' => 'admin-gallery', 'uses' => 'GalleryController@showGalleryAdmin']);
 	Route::post('admin/galerija/dodaj', ['as' => 'admin-gallery-add', 'uses' => 'GalleryController@uploadToGallery']);

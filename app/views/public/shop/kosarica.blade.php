@@ -1,7 +1,7 @@
 @include('publicLayout.header')
 
 <section id="main">
-    <h2 class="section-header"> Ponuda <i class="fa fa-angle-right"></i> Košarica</h2>
+    <h2 class="section-header"> Web Shop <i class="fa fa-angle-right"></i> Košarica</h2>
 
     <section class="section section-inner form-section">
 
