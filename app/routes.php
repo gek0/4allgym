@@ -109,6 +109,8 @@ Route::get('shop/{category}', ['as' => 'shop-category', 'uses' => 'ProductContro
 Route::get('shop/{category}/search', ['as' => 'shop-category-search', 'uses' => 'ProductController@showProductsByCategoryWithSearch'])->where(['category' => '[\w\-šđčćžŠĐČĆŽ]+']);
 Route::get('shop/proizvod/pregled/{slug}', ['as' => 'shop-product-show', 'uses' => 'ProductController@showProduct'])->where(['slug' => '[\w\-šđčćžŠĐČĆŽ]+']);
 
+Route::get('ponuda/{slug}', ['as' => 'offer-view', 'uses' => 'OfferController@showOffer'])->where(['slug' => '[\w\-šđčćžŠĐČĆŽ]+']);
+
 Route::get('cage-football', ['as' => 'cage-football', 'uses' => 'PagesController@showCageFootball']);
 Route::get('caffe-bar', ['as' => 'caffe-bar', 'uses' => 'PagesController@showCaffeBar']);
 

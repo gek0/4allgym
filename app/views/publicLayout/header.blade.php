@@ -75,6 +75,15 @@
                     {{ HTML::smartRoute_link('pocetna', 'Početna', '<i class="fa fa-home"></i>') }}
                     {{ HTML::smartRoute_link('portal', 'Portal', '<i class="fa fa-newspaper-o"></i>') }}
                     {{ HTML::smartRoute_link('shop', 'Web Shop', '<i class="fa fa-shopping-cart"></i>') }}
+                    <li><a href="#"><i class="fa fa-shopping-cart"></i> Ponuda</a>
+                        <ul class="drop-nav">
+                            @if(Cache::has('offer_cache'))
+                                @foreach(Cache::get('offer_cache') as $cache)
+                                    <li><a href="{{ URL::route('offer-view', ['slu' => $cache->slug]) }}">{{ $cache->offer_title }}</a></li>
+                                @endforeach
+                            @endif
+                        </ul>
+                    </li>
                     {{ HTML::smartRoute_link('galerija', 'Galerija', '<i class="fa fa-picture-o"></i>') }}
                     {{ HTML::smartRoute_link('caffe-bar', '4allBar', '<i class="fa fa-coffee"></i>') }}
                     {{ HTML::smartRoute_link('cage-football', 'Cage football', '<i class="fa fa-futbol-o"></i>') }}

@@ -49,4 +49,7 @@
 
 </section> <!-- end main-content -->
 
+{{-- include session notification output --}}
+@include('admin.notification')
+
 @include('publicLayout.footer')

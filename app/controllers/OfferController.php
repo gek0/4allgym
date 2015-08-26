@@ -9,6 +9,11 @@ class OfferController extends BaseController
     public function __construct()
     {
         $this->beforeFilter('crfs', ['on' => ['post', 'put', 'patch', 'delete']]);
+
+        //closure as callback
+        $this->beforeFilter(function(){
+            $this->cacheCheck();
+        });
     }
 
     protected $offer_paginate = 9;
@@ -104,6 +109,9 @@ class OfferController extends BaseController
                 }
             }
 
+            //flush cache
+            Cache::flush('offer_cache');
+
             //redirect on finish
             return Redirect::to('admin/ponuda/pregled/'.$offer->slug)->with(['success' => 'Usluga je uspješno dodana u ponudu.']);
 
@@ -153,6 +161,9 @@ class OfferController extends BaseController
 
                 //delete data from database
                 $offer->delete();
+
+                //flush cache
+                Cache::flush('offer_cache');
 
                 return Redirect::to('admin/ponuda')->with(['success' => 'Usluga je uspješno obrisana.']);
             }
@@ -315,6 +326,8 @@ class OfferController extends BaseController
                         }
                     }
 
+                    //flush cache
+                    Cache::flush('offer_cache');
 
                     //redirect on finish
                     return Redirect::to('admin/ponuda/pregled/'.$offer->slug)->with(['success' => 'Usluga je uspješno izmjenjena.']);
@@ -329,6 +342,29 @@ class OfferController extends BaseController
         }
         else{
             return Redirect::to('admin/ponuda')->withErrors('Usluga ne postoji.');
+        }
+    }
+
+    /**
+     * show individual offer page in public area
+     * @param null $slug
+     * @return mixed
+     */
+    public function showOffer($slug = null)
+    {
+        if ($slug !== null){
+            $offer_data = Offer::findBySlug(e($slug));
+
+            //check if offer exists
+            if($offer_data){
+                return View::make('public.ponuda')->with(['offer_data' => $offer_data]);
+            }
+            else{
+                return Redirect::to('pocetna')->withErrors('Usluga ne postoji.');
+            }
+        }
+        else{
+            return Redirect::to('pocetna')->withErrors('Usluga ne postoji.');
         }
     }
 

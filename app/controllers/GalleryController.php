@@ -8,6 +8,11 @@ class GalleryController extends BaseController{
     public function __construct()
     {
         $this->beforeFilter('crfs', ['on' => ['post', 'put', 'patch', 'delete']]);
+
+        //closure as callback
+        $this->beforeFilter(function(){
+            $this->cacheCheck();
+        });
     }
 
     /**
